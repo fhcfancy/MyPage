@@ -18,12 +18,25 @@ window.CERTS = [
   },
   {
     img: "sample-cert-1.svg",
-    zh: { name: "FRM 金融风险管理师", desc: "通过 FRM 一级与二级考试。" },
-    en: { name: "FRM (Financial Risk Manager)", desc: "Passed FRM Levels I & II." }
+    link: "https://my.garp.org/DigitalBadgeFRMII?id=0035d00006XWsM1AAL",
+    zh: {
+      name: "FRM 金融风险管理师",
+      desc: "通过 FRM 一级与二级考试。点击下方按钮可预览 GARP 官方数字徽章。"
+    },
+    en: {
+      name: "FRM (Financial Risk Manager)",
+      desc: "Passed FRM Levels I & II. Click the button below to preview the official GARP digital badge."
+    }
   },
   {
-    img: "sample-cert-2.svg",
-    zh: { name: "雅思 IELTS 8.0", desc: "英语流利，学术与生活场景沟通无障碍。" },
-    en: { name: "IELTS 8.0", desc: "Fluent English for academic and everyday communication." }
+    img: "IELTS-web.jpg",
+    zh: {
+      name: "雅思 IELTS 8.0",
+      desc: "Overall band score 8.0 · Listening 8.0 · Reading 8.0 · Writing 7.5 · Speaking 7.5 · CEFR Level C1"
+    },
+    en: {
+      name: "IELTS 8.0",
+      desc: "Overall band score 8.0 · Listening 8.0 · Reading 8.0 · Writing 7.5 · Speaking 7.5 · CEFR Level C1"
+    }
   }
 ];

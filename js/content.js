@@ -184,7 +184,7 @@ window.CONTENT = {
         },
         {
           name: "新点科技 · 智能作文批改",
-          role: "队长 · 2021.02 至今",
+          role: "队长 · 2021.02 - 2023.09",
           detail:
             "获第十二届「创新创意创业」比赛省级二等奖；申请「批改作文的方法、系统及装置」国家发明专利一项（已进入实审阶段），AI 智能批改作文软件著作权一项。项目致力于让科技推动教育发展，创新性构思集软硬件为一体的智能作文批改机器。"
         },
@@ -529,7 +529,7 @@ window.CONTENT = {
         },
         {
           name: "Xindian Tech · AI Essay Grading",
-          role: "Captain · Since Feb 2021",
+          role: "Captain · Feb 2021 - Sep 2023",
           detail:
             "Provincial Second Prize, 12th 'Innovation, Creativity and Entrepreneurship' Challenge; filed one national invention patent for an essay-correction method, system and device (now in substantive examination) and one software copyright for AI essay grading. Conceived an integrated hardware-software intelligent essay-grading machine to advance education through technology."
         },
