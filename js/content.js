@@ -20,7 +20,7 @@ window.CONTENT = {
       slogan: "以静默的勇气与真挚的热爱，探索、创造，用 AI 优雅地服务于人。",
       tagline: "虔诚的基督徒，执着踏实的追梦人，可爱的小女孩",
       introLines: [
-        "香港科技大学（广州）数据科学分析硕士（红鸟三期）",
+        "香港科技大学（广州）数据科学分析硕士",
         "广州大学信息与计算科学本科",
         "研究方向为大语言模型的情感智能与决策分析",
         "目前全职创业"
@@ -67,7 +67,7 @@ window.CONTENT = {
         {
           date: "2024.09 - 2026.08",
           org: "香港科技大学（广州）",
-          role: "数据科学分析 · 硕士（红鸟三期）",
+          role: "数据科学分析 · 硕士",
           detail:
             "主修：Auto Machine Learning（A）、Foundation of Data Science and Analytics（A-）、Project-driven Collaborative Design Thinking（A-）。"
         },
@@ -338,7 +338,7 @@ window.CONTENT = {
       slogan: "With quiet courage and heartfelt love, I explore, create, and serve people gracefully with AI.",
       tagline: "A devout Christian, a steadfast and grounded dream-chaser, a lovely girl",
       introLines: [
-        "MPhil in Data Science and Analytics, HKUST (Guangzhou), Red Bird Cohort 3",
+        "MPhil in Data Science and Analytics, HKUST (Guangzhou)",
         "BSc in Information and Computing Science, Guangzhou University",
         "Research focus: affective intelligence and decision-making in LLMs",
         "Now building full-time as a founder"
@@ -385,7 +385,7 @@ window.CONTENT = {
         {
           date: "Sep 2024 - Aug 2026",
           org: "HKUST (Guangzhou)",
-          role: "MPhil, Data Science and Analytics (Red Bird Cohort 3)",
+          role: "MPhil, Data Science and Analytics",
           detail:
             "Highlights: Auto ML (A), Foundation of Data Science and Analytics (A-), Project-driven Collaborative Design Thinking (A-)."
         },
