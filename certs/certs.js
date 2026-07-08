@@ -17,7 +17,7 @@ window.CERTS = [
     en: { name: "Senior High School English Teacher Certificate", desc: "Qualified to teach English at the senior high school level." }
   },
   {
-    img: "sample-cert-1.svg",
+    img: "FRM-web.jpg",
     link: "https://my.garp.org/DigitalBadgeFRMII?id=0035d00006XWsM1AAL",
     zh: {
       name: "FRM 金融风险管理师",
@@ -37,6 +37,28 @@ window.CERTS = [
     en: {
       name: "IELTS 8.0",
       desc: "Overall band score 8.0 · Listening 8.0 · Reading 8.0 · Writing 7.5 · Speaking 7.5 · CEFR Level C1"
+    }
+  },
+  {
+    link: "https://www.coursera.org/account/accomplishments/verify/5UTNYIBBJUJP",
+    zh: {
+      name: "Databases and SQL for Data Science with Python",
+      desc: "Coursera / IBM 结业证书。学习用 Python 与 SQL 分析数据库数据、构建关系表与进阶查询。"
+    },
+    en: {
+      name: "Databases and SQL for Data Science with Python",
+      desc: "Coursera / IBM certificate. Learned to analyze data with SQL and Python, work with relational tables, and write advanced queries."
+    }
+  },
+  {
+    link: "https://www.coursera.org/account/accomplishments/verify/4DOPI31EMOOD",
+    zh: {
+      name: "Vibe Coding with Cursor AI",
+      desc: "Coursera / Scrimba 结业证书。学习使用 Cursor AI 进行写意编程、生成与调试代码。"
+    },
+    en: {
+      name: "Vibe Coding with Cursor AI",
+      desc: "Coursera / Scrimba certificate. Learned to build and debug with Cursor AI for vibe coding workflows."
     }
   }
 ];
