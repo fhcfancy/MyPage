@@ -120,7 +120,8 @@ window.CONTENT = {
         {
           title:
             "The dynamics of gene transcription induced by variation in transcription kinetics",
-          venue: "发表于 Journal of Applied Analysis & Computation（本科期间）"
+          venue: "发表于 Journal of Applied Analysis & Computation（本科期间）",
+          link: "https://www.jaac-online.com/article/doi/10.11948/20230072"
         },
         {
           title:
@@ -436,7 +437,8 @@ window.CONTENT = {
         {
           title:
             "The dynamics of gene transcription induced by variation in transcription kinetics",
-          venue: "Published in Journal of Applied Analysis & Computation (undergrad)"
+          venue: "Published in Journal of Applied Analysis & Computation (undergrad)",
+          link: "https://www.jaac-online.com/article/doi/10.11948/20230072"
         },
         {
           title:

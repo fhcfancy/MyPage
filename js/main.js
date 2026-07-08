@@ -87,8 +87,11 @@
     el("resEyebrow").textContent = c.research.eyebrow;
     el("resTitle").textContent = c.research.title;
     el("researchCards").innerHTML = c.research.papers.map(function (p) {
-      return '<div class="paper anim"><p class="paper__title">' + p.title +
-        '</p><p class="paper__venue">' + p.venue + "</p></div>";
+      var titleHtml = p.link
+        ? '<a class="paper-list__title" href="' + p.link + '" target="_blank" rel="noopener">' + p.title + "</a>"
+        : '<span class="paper-list__title">' + p.title + "</span>";
+      return '<li class="paper-list__item anim">' + titleHtml +
+        '<span class="paper-list__venue">' + p.venue + "</span></li>";
     }).join("");
     el("skillTags").innerHTML = c.research.tags.map(function (t) {
       return '<span class="tag anim">' + t + "</span>";
