@@ -145,6 +145,12 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
   padding: 96px 24px;
 }
+.education-sub {
+  margin-top: 72px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+.education-sub .section__head { margin-bottom: 40px; }
 .section__head { text-align: center; max-width: 720px; margin: 0 auto 52px; }
 .section__eyebrow {
   font-size: 0.85rem;
