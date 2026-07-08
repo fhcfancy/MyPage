@@ -317,9 +317,14 @@ window.CONTENT = {
           detail: "通过金融风险管理师（FRM）一级与二级考试。"
         },
         {
-          name: "公众演讲与心理",
+          name: "公众演讲",
           detail:
-            "三分钟英语论文演讲总决赛入围选手，多次获得演讲比赛冠亚军；完成岭南大学与和富李祖尧辅导与心理研究中心举办的心理健康大使项目；持红十字初级救护员证书。"
+            "三分钟英语论文演讲总决赛入围选手，多次获得演讲比赛冠亚军。"
+        },
+        {
+          name: "心理咨询",
+          detail:
+            "完成岭南大学与和富李祖尧辅导与心理研究中心举办的心理健康大使项目。"
         },
         {
           name: "核心能力",
@@ -667,9 +672,14 @@ window.CONTENT = {
           detail: "Passed Financial Risk Manager (FRM) Levels I & II."
         },
         {
-          name: "Public Speaking & Counseling",
+          name: "Public Speaking",
           detail:
-            "Finalist, Three Minute Thesis Final Competition, with multiple champion and runner-up finishes in speech contests; completed the Wellness Ambassador Programme (Lingnan University & Wofoo Joseph Lee Consulting and Counseling Psychology Research Center); certified Red Cross first aider."
+            "Finalist, Three Minute Thesis Final Competition, with multiple champion and runner-up finishes in speech contests."
+        },
+        {
+          name: "Counseling Psychology",
+          detail:
+            "Completed the Wellness Ambassador Programme (Lingnan University & Wofoo Joseph Lee Consulting and Counseling Psychology Research Center)."
         },
         {
           name: "Core Competencies",
