@@ -292,7 +292,7 @@ window.CONTENT = {
           ]
         },
         {
-          name: "旅行爱好者",
+          name: "💎 旅行爱好者",
           role: "国内外独自旅行",
           detail:
             "足迹遍及武汉、上海、北京、杭州、巴黎、罗马、佛罗伦萨、梵蒂冈等地，具备共情理解与跨文化沟通、国际交流能力。"
@@ -646,7 +646,7 @@ window.CONTENT = {
           ]
         },
         {
-          name: "Travel Enthusiast",
+          name: "💎 Travel Enthusiast",
           role: "Solo trips at home and abroad",
           detail:
             "Traveled to Wuhan, Shanghai, Beijing, Hangzhou, Paris, Rome, Florence, Vatican and more — empathetic, personable and capable of international and cross-cultural communication."
