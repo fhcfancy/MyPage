@@ -134,14 +134,11 @@ window.CONTENT = {
         "决策行为分析",
         "Prompt Engineering",
         "推理机制评估",
-        "OpenAI / Claude / DeepSeek API",
         "Python",
-        "Pandas / NumPy / Scikit-learn",
         "统计分析与实验设计",
         "NLP 文本分类 / 情感分析",
         "数据清洗 / 特征工程",
-        "Matplotlib / Seaborn / Plotly",
-        "Jupyter / Git / LaTeX"
+        "vibe coding"
       ]
     },
     projects: {
@@ -453,14 +450,11 @@ window.CONTENT = {
         "Decision-Making Analysis",
         "Prompt Engineering",
         "Reasoning Evaluation",
-        "OpenAI / Claude / DeepSeek API",
         "Python",
-        "Pandas / NumPy / Scikit-learn",
         "Statistics & Experiment Design",
         "NLP: Classification / Sentiment",
         "Data Cleaning / Feature Engineering",
-        "Matplotlib / Seaborn / Plotly",
-        "Jupyter / Git / LaTeX"
+        "vibe coding"
       ]
     },
     projects: {
