@@ -13,7 +13,8 @@ window.CONTENT = {
       awards: "奖项",
       certs: "证书",
       skills: "技能",
-      contact: "联系"
+      contact: "联系",
+      hobbies: "爱好"
     },
     hero: {
       name: "方海潮",
@@ -347,6 +348,20 @@ window.CONTENT = {
         }
       ]
     },
+    hobbies: {
+      eyebrow: "生活趣味",
+      title: "爱好",
+      lead: "工作之外，也认真地爱着这些小事。",
+      items: [
+        { emoji: "📚", label: "看书" },
+        { emoji: "✍️", label: "写作" },
+        { emoji: "🎤", label: "唱歌" },
+        { emoji: "💃", label: "跳舞" },
+        { emoji: "🎬", label: "看电影" },
+        { emoji: "🏛️", label: "逛博物馆" },
+        { emoji: "🎨", label: "赏画展" }
+      ]
+    },
     footer: "© 2026 方海潮 Fang (Carina) Hai-Chao · 用心打造"
   },
 
@@ -362,7 +377,8 @@ window.CONTENT = {
       awards: "Awards",
       certs: "Certificates",
       skills: "Skills",
-      contact: "Contact"
+      contact: "Contact",
+      hobbies: "Hobbies"
     },
     hero: {
       name: "Fang (Carina) Hai-Chao",
@@ -700,6 +716,20 @@ window.CONTENT = {
           value: "hai-chao-fang",
           href: "https://www.linkedin.com/in/hai-chao-fang-00b622287"
         }
+      ]
+    },
+    hobbies: {
+      eyebrow: "Life & Joy",
+      title: "Hobbies",
+      lead: "Outside of work, I cherish these little loves too.",
+      items: [
+        { emoji: "📚", label: "Reading" },
+        { emoji: "✍️", label: "Writing" },
+        { emoji: "🎤", label: "Singing" },
+        { emoji: "💃", label: "Dancing" },
+        { emoji: "🎬", label: "Movies" },
+        { emoji: "🏛️", label: "Museums" },
+        { emoji: "🎨", label: "Art Exhibitions" }
       ]
     },
     footer: "© 2026 Fang (Carina) Hai-Chao · Made with care"

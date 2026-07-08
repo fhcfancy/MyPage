@@ -166,6 +166,16 @@
         '<p class="contact-card__value">' + it.value + "</p></a>";
     }).join("");
 
+    // 爱好
+    el("hobbiesEyebrow").textContent = c.hobbies.eyebrow;
+    el("hobbiesTitle").textContent = c.hobbies.title;
+    el("hobbiesLead").textContent = c.hobbies.lead || "";
+    el("hobbyTags").innerHTML = c.hobbies.items.map(function (h, i) {
+      return '<span class="hobby-tag anim" style="--i:' + i + '">' +
+        '<span class="hobby-tag__emoji" aria-hidden="true">' + h.emoji + "</span>" +
+        '<span class="hobby-tag__label">' + h.label + "</span></span>";
+    }).join("");
+
     // 页脚
     el("footerText").textContent = c.footer;
 

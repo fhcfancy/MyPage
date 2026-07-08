@@ -686,6 +686,123 @@ a.paper-list__title:hover {
 .contact-card__label { font-size: 0.82rem; color: var(--text-faint); letter-spacing: 0.5px; text-transform: uppercase; }
 .contact-card__value { font-size: 1.02rem; font-weight: 600; margin-top: 6px; word-break: break-all; }
 
+/* ===== Hobbies ===== */
+.hobbies {
+  padding-bottom: 40px;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 80%, var(--glow-2), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 85% 20%, var(--glow-1), transparent 55%);
+}
+.hobby-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 16px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.hobby-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 980px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  box-shadow: 0 8px 24px rgba(150, 130, 200, 0.12);
+  transition: transform 0.28s cubic-bezier(0.34, 1.45, 0.64, 1), box-shadow 0.25s ease;
+  animation: hobbyPop 0.55s ease both;
+  animation-delay: calc(var(--i, 0) * 0.06s);
+}
+.hobby-tag:hover {
+  transform: translateY(-4px) scale(1.04) rotate(-1.5deg);
+  box-shadow: 0 14px 32px rgba(150, 130, 200, 0.22);
+}
+.hobby-tag__emoji { font-size: 1.15rem; line-height: 1; }
+.hobby-tag__label { line-height: 1.2; }
+
+.hobby-tag:nth-child(7n+1) {
+  background: linear-gradient(135deg, rgba(168, 200, 240, 0.35), rgba(196, 176, 240, 0.28));
+  border-color: rgba(140, 170, 230, 0.35);
+  color: #3d4a7a;
+}
+.hobby-tag:nth-child(7n+2) {
+  background: linear-gradient(135deg, rgba(240, 184, 216, 0.4), rgba(246, 200, 220, 0.28));
+  border-color: rgba(230, 150, 190, 0.35);
+  color: #7a3d5c;
+}
+.hobby-tag:nth-child(7n+3) {
+  background: linear-gradient(135deg, rgba(196, 176, 240, 0.38), rgba(180, 200, 245, 0.28));
+  border-color: rgba(160, 140, 230, 0.35);
+  color: #4a3d7a;
+}
+.hobby-tag:nth-child(7n+4) {
+  background: linear-gradient(135deg, rgba(180, 230, 220, 0.4), rgba(168, 210, 240, 0.28));
+  border-color: rgba(120, 200, 190, 0.35);
+  color: #2d6a62;
+}
+.hobby-tag:nth-child(7n+5) {
+  background: linear-gradient(135deg, rgba(255, 210, 180, 0.42), rgba(246, 200, 220, 0.28));
+  border-color: rgba(240, 180, 140, 0.4);
+  color: #7a4a2d;
+}
+.hobby-tag:nth-child(7n+6) {
+  background: linear-gradient(135deg, rgba(200, 220, 255, 0.4), rgba(210, 190, 245, 0.3));
+  border-color: rgba(150, 170, 230, 0.4);
+  color: #3d4a7a;
+}
+.hobby-tag:nth-child(7n+7) {
+  background: linear-gradient(135deg, rgba(250, 200, 230, 0.4), rgba(220, 190, 250, 0.3));
+  border-color: rgba(220, 150, 210, 0.35);
+  color: #6a3d7a;
+}
+
+[data-theme="dark"] .hobby-tag:nth-child(7n+1),
+[data-theme="dark"] .hobby-tag:nth-child(7n+2),
+[data-theme="dark"] .hobby-tag:nth-child(7n+3),
+[data-theme="dark"] .hobby-tag:nth-child(7n+4),
+[data-theme="dark"] .hobby-tag:nth-child(7n+5),
+[data-theme="dark"] .hobby-tag:nth-child(7n+6),
+[data-theme="dark"] .hobby-tag:nth-child(7n+7) {
+  color: var(--text);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+[data-theme="dark"] .hobby-tag:nth-child(7n+1) {
+  background: linear-gradient(135deg, rgba(100, 140, 220, 0.28), rgba(140, 120, 220, 0.22));
+  border-color: rgba(140, 170, 230, 0.28);
+}
+[data-theme="dark"] .hobby-tag:nth-child(7n+2) {
+  background: linear-gradient(135deg, rgba(220, 120, 170, 0.28), rgba(200, 100, 160, 0.2));
+  border-color: rgba(230, 150, 190, 0.28);
+}
+[data-theme="dark"] .hobby-tag:nth-child(7n+3) {
+  background: linear-gradient(135deg, rgba(150, 120, 230, 0.3), rgba(120, 150, 230, 0.22));
+  border-color: rgba(160, 140, 230, 0.28);
+}
+[data-theme="dark"] .hobby-tag:nth-child(7n+4) {
+  background: linear-gradient(135deg, rgba(80, 180, 160, 0.28), rgba(90, 160, 200, 0.22));
+  border-color: rgba(120, 200, 190, 0.28);
+}
+[data-theme="dark"] .hobby-tag:nth-child(7n+5) {
+  background: linear-gradient(135deg, rgba(220, 150, 100, 0.28), rgba(220, 120, 160, 0.2));
+  border-color: rgba(240, 180, 140, 0.3);
+}
+[data-theme="dark"] .hobby-tag:nth-child(7n+6) {
+  background: linear-gradient(135deg, rgba(110, 140, 230, 0.3), rgba(150, 120, 230, 0.22));
+  border-color: rgba(150, 170, 230, 0.3);
+}
+[data-theme="dark"] .hobby-tag:nth-child(7n+7) {
+  background: linear-gradient(135deg, rgba(210, 120, 190, 0.28), rgba(170, 120, 230, 0.22));
+  border-color: rgba(220, 150, 210, 0.28);
+}
+
+@keyframes hobbyPop {
+  from { opacity: 0; transform: translateY(12px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 /* ===== Footer ===== */
 .footer {
   text-align: center;
@@ -780,7 +897,8 @@ a.paper-list__title:hover {
 /* Touch devices: no hover lift, larger tap targets */
 @media (hover: none) {
   .card:hover, .recruit-card:hover, .contact-card:hover, .cert-card:hover,
-  .photos__grid img:hover, .icon-btn:hover, .btn:hover, .tag:hover {
+  .photos__grid img:hover, .icon-btn:hover, .btn:hover, .tag:hover,
+  .hobby-tag:hover {
     transform: none;
   }
   .nav__links a { padding: 6px 0; }
