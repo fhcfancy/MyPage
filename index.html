@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>方海潮 · Carina Fang</title>
+  <meta name="description" content="方海潮 (Carina Fang) — 全职创业者，港科大（广州）数据科学与分析硕士。个人主页。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- 顶部导航栏 -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#hero" data-i18n="nav.logo">Carina Fang</a>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="#recruit" data-i18n="nav.recruit">创业</a>
+        <a href="#photos" data-i18n="nav.photos">照片</a>
+        <a href="#education" data-i18n="nav.education">教育</a>
+        <a href="#experience" data-i18n="nav.experience">经历</a>
+        <a href="#projects" data-i18n="nav.projects">项目</a>
+        <a href="#awards" data-i18n="nav.awards">奖项</a>
+        <a href="#certificates" data-i18n="nav.certs">证书</a>
+        <a href="#skills" data-i18n="nav.skills">技能</a>
+        <a href="#contact" data-i18n="nav.contact">联系</a>
+      </nav>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="langToggle" aria-label="Switch language">
+          <span class="lang-text">EN</span>
+        </button>
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon icon--sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon icon--moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="icon-btn nav__burger" id="burger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero__glow"></div>
+      <p class="hero__slogan" id="heroSlogan"></p>
+      <div class="hero__inner">
+        <img class="hero__avatar" id="heroAvatar" src="assets/profile.jpg" alt="avatar" width="132" height="132" />
+        <h1 class="hero__name" id="heroName"></h1>
+        <p class="hero__tagline" id="heroTagline"></p>
+        <p class="hero__intro" id="heroIntro"></p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" id="heroLinkedin" href="#" target="_blank" rel="noopener" data-i18n="hero.linkedin">LinkedIn</a>
+          <a class="btn btn--ghost" id="heroEmail" href="#" data-i18n="hero.email">邮箱</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 招募 -->
+    <section class="section recruit" id="recruit">
+      <div class="section__head reveal">
+        <p class="section__eyebrow" id="recruitEyebrow"></p>
+        <h2 class="section__title" id="recruitTitle"></h2>
+        <p class="section__lead" id="recruitLead"></p>
+      </div>
+      <div class="recruit__grid" id="recruitGrid"></div>
+    </section>
+
+    <!-- 照片墙 -->
+    <section class="section photos" id="photos">
+      <div class="section__head reveal">
+        <p class="section__eyebrow" id="photosEyebrow"></p>
+        <h2 class="section__title" id="photosTitle"></h2>
+        <p class="section__lead" id="photosLead"></p>
+      </div>
+      <div class="photos__grid" id="photosGrid"></div>
+    </section>
+
+    <!-- 教育 -->
+    <section class="section" id="education">
+      <div class="section__head reveal">
+        <p class="section__eyebrow" id="eduEyebrow"></p>
+        <h2 class="section__title" id="eduTitle"></h2>
+      </div>
+      <div class="timeline" id="eduTimeline"></div>
+    </section>
+
+    <!-- 实习经历 -->
+    <section class="section" id="experience">
+      <div class="section__head reveal">
+        <p class="section__eyebrow" id="expEyebrow"></p>
+        <h2 class="section__title" id="expTitle"></h2>
+      </div>
+      <div class="timeline" id="expTimeline"></div>
+    </section>
+
+    <!-- 科研 -->
+    <section class="section" id="research">
+      <div class="section__head reveal">
+        <p class="section__eyebrow" id="resEyebrow"></p>
+        <h2 class="section__title" id="resTitle"></h2>
+      </div>
+      <div class="cards" id="researchCards"></div>
+      <div class="tagcloud" id="skillTags"></div>
+    </section>
+
+    <!-- 项目经历 -->
+    <section class="section" id="projects">
+      <div class="section__head reveal">
+        <p class="section__eyebrow" id="projEyebrow"></p>
+        <h2 class="section__title" id="projTitle"></h2>
+      </div>
+      <div class="cards" id="projectCards"></div>
+    </section>
+
+    <!-- 奖项 -->
+    <section class="section" id="awards">
+      <div class="section__head reveal">
+        <p class="section__eyebrow" id="awardEyebrow"></p>
+        <h2 class="section__title" id="awardTitle"></h2>
+      </div>
+      <div class="awards__grid" id="awardGrid"></div>
+    </section>
+
+    <!-- 证书 -->
+    <section class="section" id="certificates">
+      <div class="section__head reveal">
+        <p class="section__eyebrow" id="certsEyebrow"></p>
+        <h2 class="section__title" id="certsTitle"></h2>
+        <p class="section__lead" id="certsLead"></p>
+      </div>
+      <div class="certs__grid" id="certsGrid"></div>
+    </section>
+
+    <!-- 校园与社会经历 -->
+    <section class="section" id="campus">
+      <div class="section__head reveal">
+        <p class="section__eyebrow" id="campusEyebrow"></p>
+        <h2 class="section__title" id="campusTitle"></h2>
+      </div>
+      <div class="cards" id="campusCards"></div>
+    </section>
+
+    <!-- 技能 -->
+    <section class="section" id="skills">
+      <div class="section__head reveal">
+        <p class="section__eyebrow" id="skillsEyebrow"></p>
+        <h2 class="section__title" id="skillsTitle"></h2>
+      </div>
+      <div class="cards" id="skillsCards"></div>
+    </section>
+
+    <!-- 联系 -->
+    <section class="section contact" id="contact">
+      <div class="section__head reveal">
+        <p class="section__eyebrow" id="contactEyebrow"></p>
+        <h2 class="section__title" id="contactTitle"></h2>
+      </div>
+      <div class="contact__grid" id="contactGrid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p id="footerText"></p>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+  </div>
+
+  <script src="js/content.js"></script>
+  <script src="photos/photos.js"></script>
+  <script src="certs/certs.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
