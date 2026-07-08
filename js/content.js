@@ -69,13 +69,14 @@ window.CONTENT = {
           org: "香港科技大学（广州）",
           role: "数据科学分析 · 硕士（红鸟三期）",
           detail:
-            "GPA 3.82/4.00，加权成绩 93/100。主修：数学模型（97）、概率论与数理统计（98）、常微分方程（99）、数学建模竞赛的理论与实践（优）；Auto Machine Learning（A）、Foundation of Data Science and Analytics（A-）、Project-driven Collaborative Design Thinking（A-）。"
+            "主修：Auto Machine Learning（A）、Foundation of Data Science and Analytics（A-）、Project-driven Collaborative Design Thinking（A-）。"
         },
         {
           date: "2020.09 - 2024.06",
           org: "广州大学",
           role: "信息与计算科学 · 本科",
-          detail: "打下扎实的数学与计算基础，广泛参与数学建模、创新创业与英语竞赛，本科期间发表学术论文一篇。"
+          detail:
+            "GPA 3.82/4.00，加权成绩 93/100。主修：数学模型（97）、概率论与数理统计（98）、常微分方程（99）、数学建模竞赛的理论与实践（优）。打下扎实的数学与计算基础，广泛参与数学建模、创新创业与英语竞赛，本科期间发表学术论文一篇。"
         }
       ]
     },
@@ -386,14 +387,14 @@ window.CONTENT = {
           org: "HKUST (Guangzhou)",
           role: "MPhil, Data Science and Analytics (Red Bird Cohort 3)",
           detail:
-            "GPA 3.82/4.00, weighted 93/100. Highlights: Mathematical Model (97), Probability and Mathematical Statistics (98), ODE (99), Mathematical Modeling Contest Theory and Practice (Excellent); Auto ML (A), Foundation of Data Science and Analytics (A-), Project-driven Collaborative Design Thinking (A-)."
+            "Highlights: Auto ML (A), Foundation of Data Science and Analytics (A-), Project-driven Collaborative Design Thinking (A-)."
         },
         {
           date: "Sep 2020 - Jun 2024",
           org: "Guangzhou University",
           role: "BSc, Information and Computing Science",
           detail:
-            "Built a solid foundation in mathematics and computing; active in modeling, entrepreneurship and English competitions, with one academic paper published as an undergraduate."
+            "GPA 3.82/4.00, weighted 93/100. Highlights: Mathematical Model (97), Probability and Mathematical Statistics (98), ODE (99), Mathematical Modeling Contest Theory and Practice (Excellent). Built a solid foundation in mathematics and computing; active in modeling, entrepreneurship and English competitions, with one academic paper published as an undergraduate."
         }
       ]
     },
