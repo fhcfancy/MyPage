@@ -151,6 +151,63 @@ a { color: inherit; text-decoration: none; }
   border-top: 1px solid var(--border);
 }
 .education-sub .section__head { margin-bottom: 40px; }
+.experience-sub {
+  margin-top: 72px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+.experience-sub .section__head { margin-bottom: 36px; }
+.subgroup { margin-top: 28px; }
+.subgroup__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 18px;
+  letter-spacing: 0.3px;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.card__bullets {
+  list-style: none;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.card__bullets li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+.card__bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--grad);
+}
+.card__gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+.card__gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: zoom-in;
+  border: 1px solid var(--border);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card__gallery img:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.card--gallery { grid-column: 1 / -1; }
 .section__head { text-align: center; max-width: 720px; margin: 0 auto 52px; }
 .section__eyebrow {
   font-size: 0.85rem;
@@ -716,6 +773,7 @@ a.paper-list__title:hover {
   .hero__cta { flex-direction: column; align-items: center; }
   .contact-card { padding: 26px 20px; }
   .footer { padding-bottom: max(56px, env(safe-area-inset-bottom)); }
+  .card__gallery { grid-template-columns: 1fr; }
   .lightbox { padding: 16px; }
 }
 

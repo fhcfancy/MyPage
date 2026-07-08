@@ -97,10 +97,13 @@
       return '<span class="tag anim">' + t + "</span>";
     }).join("");
 
-    // 项目
+    // 项目：研学 + 竞赛
     el("projEyebrow").textContent = c.projects.eyebrow;
     el("projTitle").textContent = c.projects.title;
-    el("projectCards").innerHTML = cards(c.projects.items);
+    el("projStudyTitle").textContent = c.projects.studyTitle;
+    el("projContestTitle").textContent = c.projects.contestTitle;
+    el("projectStudyCards").innerHTML = richCards(c.projects.study);
+    el("projectContestCards").innerHTML = richCards(c.projects.contest);
 
     // 奖项
     el("awardEyebrow").textContent = c.awards.eyebrow;
@@ -133,18 +136,16 @@
         linkBtn +
         "</div></div>";
     }).join("");
-    el("certsGrid").querySelectorAll(".cert-card__img").forEach(function (img) {
-      img.addEventListener("click", function () {
-        el("lightboxImg").setAttribute("src", img.getAttribute("src"));
-        el("lightbox").classList.add("open");
-        el("lightbox").setAttribute("aria-hidden", "false");
-      });
-    });
+    el("certsGrid").querySelectorAll(".cert-card__img").forEach(bindLightbox);
 
-    // 校园
+    // 校园与社会：校园 + 社会
     el("campusEyebrow").textContent = c.campus.eyebrow;
     el("campusTitle").textContent = c.campus.title;
-    el("campusCards").innerHTML = cards(c.campus.items);
+    el("campusCampusTitle").textContent = c.campus.campusTitle;
+    el("campusSocietyTitle").textContent = c.campus.societyTitle;
+    el("campusCampusCards").innerHTML = richCards(c.campus.campus);
+    el("campusSocietyCards").innerHTML = richCards(c.campus.society);
+    el("campusSocietyCards").querySelectorAll(".card__gallery img").forEach(bindLightbox);
 
     // 技能
     el("skillsEyebrow").textContent = c.skills.eyebrow;
@@ -187,6 +188,31 @@
         '</p><p class="card__role">' + it.role +
         '</p><p class="card__detail">' + it.detail + "</p></div>";
     }).join("");
+  }
+
+  function richCards(items) {
+    return (items || []).map(function (it) {
+      var bullets = (it.bullets && it.bullets.length)
+        ? '<ul class="card__bullets">' + it.bullets.map(function (b) { return "<li>" + b + "</li>"; }).join("") + "</ul>"
+        : "";
+      var images = (it.images && it.images.length)
+        ? '<div class="card__gallery">' + it.images.map(function (img) {
+            return '<img src="' + img.src + '" alt="' + (img.alt || "") + '" loading="lazy" />';
+          }).join("") + "</div>"
+        : "";
+      return '<div class="card anim' + (it.images ? " card--gallery" : "") + '"><p class="card__name">' + it.name +
+        '</p><p class="card__role">' + it.role +
+        '</p><p class="card__detail">' + it.detail + "</p>" +
+        bullets + images + "</div>";
+    }).join("");
+  }
+
+  function bindLightbox(img) {
+    img.addEventListener("click", function () {
+      el("lightboxImg").setAttribute("src", img.getAttribute("src"));
+      el("lightbox").classList.add("open");
+      el("lightbox").setAttribute("aria-hidden", "false");
+    });
   }
 
   function contactIcon(label) {

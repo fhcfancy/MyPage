@@ -19,7 +19,6 @@
         <a href="#photos" data-i18n="nav.photos">照片</a>
         <a href="#education" data-i18n="nav.education">教育</a>
         <a href="#experience" data-i18n="nav.experience">经历</a>
-        <a href="#projects" data-i18n="nav.projects">项目</a>
         <a href="#awards" data-i18n="nav.awards">奖项</a>
         <a href="#certificates" data-i18n="nav.certs">证书</a>
         <a href="#skills" data-i18n="nav.skills">技能</a>
@@ -100,22 +99,43 @@
       </div>
     </section>
 
-    <!-- 实习经历 -->
-    <section class="section" id="experience">
+    <!-- 经历页：实习 + 项目 + 校园与社会 -->
+    <section class="section experience-page" id="experience">
       <div class="section__head reveal">
         <p class="section__eyebrow" id="expEyebrow"></p>
         <h2 class="section__title" id="expTitle"></h2>
       </div>
       <div class="timeline" id="expTimeline"></div>
-    </section>
 
-    <!-- 项目经历 -->
-    <section class="section" id="projects">
-      <div class="section__head reveal">
-        <p class="section__eyebrow" id="projEyebrow"></p>
-        <h2 class="section__title" id="projTitle"></h2>
+      <div class="experience-sub" id="projects">
+        <div class="section__head reveal">
+          <p class="section__eyebrow" id="projEyebrow"></p>
+          <h2 class="section__title" id="projTitle"></h2>
+        </div>
+        <div class="subgroup">
+          <h3 class="subgroup__title" id="projStudyTitle"></h3>
+          <div class="cards" id="projectStudyCards"></div>
+        </div>
+        <div class="subgroup">
+          <h3 class="subgroup__title" id="projContestTitle"></h3>
+          <div class="cards" id="projectContestCards"></div>
+        </div>
       </div>
-      <div class="cards" id="projectCards"></div>
+
+      <div class="experience-sub" id="campus">
+        <div class="section__head reveal">
+          <p class="section__eyebrow" id="campusEyebrow"></p>
+          <h2 class="section__title" id="campusTitle"></h2>
+        </div>
+        <div class="subgroup">
+          <h3 class="subgroup__title" id="campusCampusTitle"></h3>
+          <div class="cards" id="campusCampusCards"></div>
+        </div>
+        <div class="subgroup">
+          <h3 class="subgroup__title" id="campusSocietyTitle"></h3>
+          <div class="cards" id="campusSocietyCards"></div>
+        </div>
+      </div>
     </section>
 
     <!-- 奖项 -->
@@ -135,15 +155,6 @@
         <p class="section__lead" id="certsLead"></p>
       </div>
       <div class="certs__grid" id="certsGrid"></div>
-    </section>
-
-    <!-- 校园与社会经历 -->
-    <section class="section" id="campus">
-      <div class="section__head reveal">
-        <p class="section__eyebrow" id="campusEyebrow"></p>
-        <h2 class="section__title" id="campusTitle"></h2>
-      </div>
-      <div class="cards" id="campusCards"></div>
     </section>
 
     <!-- 技能 -->

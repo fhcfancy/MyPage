@@ -146,8 +146,10 @@ window.CONTENT = {
     },
     projects: {
       eyebrow: "项目经历",
-      title: "研学与竞赛项目",
-      items: [
+      title: "项目经历",
+      studyTitle: "研学",
+      contestTitle: "竞赛",
+      study: [
         {
           name: "新加坡沉浸式研学",
           role: "组长 · 2025.12",
@@ -155,11 +157,13 @@ window.CONTENT = {
             "基于华为云的沉浸式沙盒环境构建聊天机器人；以新加坡语境为背景，通过以学生为中心的故事角色扮演激发中文学习动机；走访 Singtel 企业及当地创业机构，探索新加坡饮食、历史、城市景观与人文风貌。"
         },
         {
-          name: "人类学研学项目",
+          name: "法国超文化人类学研学",
           role: "成员 · 2025.05 - 2025.06",
           detail:
             "深度探访法国（尤其是巴黎）文化地标，理解法国文化遗产；调研当地习俗与实践，培养跨文化认知与适应能力；反思人类共通价值，发展超文化视角与全球责任感。"
-        },
+        }
+      ],
+      contest: [
         {
           name: "知行研学",
           role: "队员 · 2021.09 - 2022.06",
@@ -207,6 +211,7 @@ window.CONTENT = {
         {
           group: "商业与数据分析竞赛",
           items: [
+            "第八届中国国际「互联网+」大学生创新创业大赛全国总决赛银奖",
             "2023 年正大杯市场调查分析比赛省级一等奖（统筹管理团队，综合运用统计与数学知识完成研究报告）",
             "意大利国际创业竞赛三等奖"
           ]
@@ -232,7 +237,9 @@ window.CONTENT = {
     campus: {
       eyebrow: "校园与社会",
       title: "校园与社会经历",
-      items: [
+      campusTitle: "校园经历",
+      societyTitle: "社会经历",
+      campus: [
         {
           name: "红鸟国际交流项目（RISE Week）",
           role: "教学助理 · 2026.01",
@@ -258,12 +265,31 @@ window.CONTENT = {
           name: "校舞蹈队",
           role: "成员 · 2020.09 - 2021.02",
           detail: "参与广州大学合并组建 20 周年迎新晚会及成果展演出。"
-        },
+        }
+      ],
+      society: [
         {
-          name: "私人教师 & 志愿者",
+          name: "私人教师",
           role: "2020 至今",
           detail:
-            "辅导八、九、十二年级学生英语与数学，建立良好师生关系并提供长期学业与生活指导；走访经济困难家庭、参与防疫志愿服务、担任音乐会后台工作人员等。"
+            "辅导小学至高中学生英语与数学，建立良好师生关系并提供长期学业与生活指导；耐心引导并与学生做朋友，激发兴趣、促进自主学习。结果：高三学生从 40～50 分提高到高考 96 分；初三学生从 70～90 分提高到 106 分。具备单人一对一及一对多教学经验，并开展雅思口语培训与雅思英语小班教学。",
+          bullets: [
+            "高三学生：40～50 分 → 高考 96 分",
+            "初三学生：70～90 分 → 106 分",
+            "一对一及一对多经验丰富",
+            "雅思口语培训 / 雅思英语小班教学"
+          ]
+        },
+        {
+          name: "志愿者",
+          role: "2021 至今",
+          detail:
+            "走访经济困难家庭，为老人贴对联、打扫卫生；参与防疫志愿服务、担任音乐会后台工作人员等。完成了为期十周的「童年一课」伴读志愿活动，并获得「匠心伴读」「分享之星」荣誉证书。",
+          images: [
+            { src: "photos/volunteer/童年一课志愿服务证书-web.jpg", alt: "童年一课志愿服务证书" },
+            { src: "photos/volunteer/童年一课匠心伴读-web.jpg", alt: "童年一课匠心伴读" },
+            { src: "photos/volunteer/分享之星-web.jpg", alt: "分享之星" }
+          ]
         },
         {
           name: "旅行爱好者",
@@ -465,8 +491,10 @@ window.CONTENT = {
     },
     projects: {
       eyebrow: "Projects",
-      title: "Study Trips & Competitions",
-      items: [
+      title: "Projects",
+      studyTitle: "Study Trips",
+      contestTitle: "Competitions",
+      study: [
         {
           name: "Immersive Study Program, Singapore",
           role: "Leader · Dec 2025",
@@ -474,11 +502,13 @@ window.CONTENT = {
             "Built a chatbot in an immersive sandbox on HUAWEI Cloud; cultivated motivation for Chinese learning through student-centered story role-play in a Singapore context; visited Singtel and local startup institutions while exploring Singapore's food, history, landscapes and people."
         },
         {
-          name: "Anthropology Research Project",
+          name: "France Transcultural Anthropology Study",
           role: "Member · Apr - Jun 2025",
           detail:
             "Explored France's cultural landmarks (especially Paris) to understand cultural heritage; researched local customs to strengthen cross-cultural competence; reflected on universal human values to cultivate a transcultural perspective and global responsibility."
-        },
+        }
+      ],
+      contest: [
         {
           name: "Zhixing Study Program",
           role: "Member · Sep 2021 - Jun 2022",
@@ -526,6 +556,7 @@ window.CONTENT = {
         {
           group: "Business & Data Analytics",
           items: [
+            "National Finals Silver Award, 8th China International 'Internet+' Innovation & Entrepreneurship Competition",
             "First Prize (Provincial), CP Group Market Research and Analysis Competition, 2023 — led project coordination and team management, applying statistical and quantitative methods to the final report",
             "Third Prize, International Entrepreneurship Competition (Italy)"
           ]
@@ -551,7 +582,9 @@ window.CONTENT = {
     campus: {
       eyebrow: "Campus & Society",
       title: "Campus & Community",
-      items: [
+      campusTitle: "Campus",
+      societyTitle: "Society",
+      campus: [
         {
           name: "RISE Week Int'l Exchange",
           role: "Teaching Assistant · Jan 2026",
@@ -581,12 +614,31 @@ window.CONTENT = {
           role: "Dancer · Sep 2020 - Feb 2021",
           detail:
             "Performed in the welcome party for the 20th anniversary of Guangzhou University's merger and the achievement exhibition."
-        },
+        }
+      ],
+      society: [
         {
-          name: "Private Tutor & Volunteer",
+          name: "Private Tutor",
           role: "Since 2020",
           detail:
-            "Tutored Grade 8, 9 and 12 students in English and mathematics, providing continuous academic and life guidance; visited families in need, volunteered for epidemic prevention, and served as backstage staff at concerts."
+            "Tutored primary to high-school students in English and math, building lasting teacher-student relationships and providing long-term academic and life guidance; patiently guided students as friends, sparked interest, and fostered independent learning. Results: a Grade-12 student rose from 40-50 to 96 on the Gaokao English; a Grade-9 student rose from 70-90 to 106. Experienced in one-on-one and one-to-many teaching, plus IELTS speaking and small-group IELTS English training.",
+          bullets: [
+            "Grade 12: 40-50 → Gaokao 96",
+            "Grade 9: 70-90 → 106",
+            "Strong one-on-one and one-to-many teaching experience",
+            "IELTS speaking / small-group IELTS English training"
+          ]
+        },
+        {
+          name: "Volunteer",
+          role: "Since 2021",
+          detail:
+            "Visited families in need, put up couplets and cleaned for the elderly; joined epidemic-prevention volunteering and served as backstage concert staff. Completed a ten-week 'Childhood Lesson' companion-reading volunteering program and received the Craft Companion Reader and Sharing Star certificates.",
+          images: [
+            { src: "photos/volunteer/童年一课志愿服务证书-web.jpg", alt: "Childhood Lesson volunteering certificate" },
+            { src: "photos/volunteer/童年一课匠心伴读-web.jpg", alt: "Craft Companion Reader certificate" },
+            { src: "photos/volunteer/分享之星-web.jpg", alt: "Sharing Star certificate" }
+          ]
         },
         {
           name: "Travel Enthusiast",
