@@ -133,13 +133,15 @@ window.CONTENT = {
         "大语言模型 (LLM)",
         "情感智能",
         "决策行为分析",
-        "Prompt Engineering",
+        "提示工程",
         "推理机制评估",
         "Python",
+        "SQL",
+        "数据工程",
         "统计分析与实验设计",
         "NLP 文本分类 / 情感分析",
         "数据清洗 / 特征工程",
-        "vibe coding"
+        "写意编程"
       ]
     },
     projects: {
@@ -453,10 +455,12 @@ window.CONTENT = {
         "Prompt Engineering",
         "Reasoning Evaluation",
         "Python",
+        "SQL",
+        "Data Engineering",
         "Statistics & Experiment Design",
         "NLP: Classification / Sentiment",
         "Data Cleaning / Feature Engineering",
-        "vibe coding"
+        "Vibe Coding"
       ]
     },
     projects: {
