@@ -273,13 +273,7 @@ window.CONTENT = {
           name: "私人教师",
           role: "2020 至今",
           detail:
-            "辅导小学至高中学生英语与数学，建立良好师生关系并提供长期学业与生活指导；耐心引导并与学生做朋友，激发兴趣、促进自主学习。结果：高三学生从 40～50 分提高到高考 96 分；初三学生从 70～90 分提高到 106 分。具备单人一对一及一对多教学经验，并开展雅思口语培训与雅思英语小班教学。",
-          bullets: [
-            "高三学生：40～50 分 → 高考 96 分",
-            "初三学生：70～90 分 → 106 分",
-            "一对一及一对多经验丰富",
-            "雅思口语培训 / 雅思英语小班教学"
-          ]
+            "辅导小学至高中学生英语与数学，建立良好师生关系并提供长期学业与生活指导；耐心引导并与学生做朋友，激发兴趣、促进自主学习。"
         },
         {
           name: "志愿者",
@@ -642,13 +636,7 @@ window.CONTENT = {
           name: "Private Tutor",
           role: "Since 2020",
           detail:
-            "Tutored primary to high-school students in English and math, building lasting teacher-student relationships and providing long-term academic and life guidance; patiently guided students as friends, sparked interest, and fostered independent learning. Results: a Grade-12 student rose from 40-50 to 96 on the Gaokao English; a Grade-9 student rose from 70-90 to 106. Experienced in one-on-one and one-to-many teaching, plus IELTS speaking and small-group IELTS English training.",
-          bullets: [
-            "Grade 12: 40-50 → Gaokao 96",
-            "Grade 9: 70-90 → 106",
-            "Strong one-on-one and one-to-many teaching experience",
-            "IELTS speaking / small-group IELTS English training"
-          ]
+            "Tutored primary to high-school students in English and math, building lasting teacher-student relationships and providing long-term academic and life guidance; patiently guided students as friends, sparked interest, and fostered independent learning."
         },
         {
           name: "Volunteer",
