@@ -212,7 +212,7 @@
         : "";
       return '<div class="card anim' + (it.images ? " card--gallery" : "") + '"><p class="card__name">' + it.name +
         '</p><p class="card__role">' + it.role +
-        '</p><p class="card__detail">' + it.detail + "</p>" +
+        '</p>' + (it.detail ? '<p class="card__detail">' + it.detail + "</p>" : "") +
         bullets + images + "</div>";
     }).join("");
   }
