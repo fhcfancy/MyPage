@@ -272,6 +272,8 @@ window.CONTENT = {
         {
           name: "私人教师",
           role: "2020 至今",
+          detail:
+            "辅导小学至高中学生英语与数学，建立良好师生关系并提供长期学业与生活指导；耐心引导并与学生做朋友，激发兴趣、促进自主学习。",
           bullets: [
             "高三学生：40～50 分 → 高考 96 分",
             "初三学生：70～90 分 → 106 分",
@@ -639,6 +641,8 @@ window.CONTENT = {
         {
           name: "Private Tutor",
           role: "Since 2020",
+          detail:
+            "Tutored primary to high-school students in English and math, building lasting teacher-student relationships and providing long-term academic and life guidance; patiently guided students as friends, sparked interest, and fostered independent learning.",
           bullets: [
             "Grade 12: 40-50 → Gaokao 96",
             "Grade 9: 70-90 → 106",
