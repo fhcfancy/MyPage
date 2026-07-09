@@ -40,7 +40,7 @@ window.CONTENT = {
           name: "人生原稿",
           tagline: "用 AI 记录平凡人的不凡人生，让每一个平凡人生都被看见",
           points: [
-            "五大 AI Agent（预访谈、深度访谈、内容整理、视频生成、审核优化）全流程自动化，生成访谈稿、自传与个人纪录片",
+            "五大 AI Agent 全流程自动化，生成访谈稿、自传与个人纪录片",
             "面向 3.2 亿老龄人口的银发经济与家族记忆传承需求，替代高价、低效、依赖人工的传统回忆录服务",
             "愿景：成为个人纪录片创作的专业赋能平台，建立全球最大的真实个人故事库，推动家风传承"
           ]
@@ -404,7 +404,7 @@ window.CONTENT = {
           name: "Life Manuscript",
           tagline: "Using AI to record the extraordinary lives of ordinary people — so every life is seen",
           points: [
-            "Five AI agents (pre-interview, deep interview, content curation, video generation, review) automate the full pipeline from interview transcripts to autobiographies and personal documentaries",
+            "Five AI agents automate the full pipeline, generating interview transcripts, autobiographies, and personal documentaries",
             "Serving the silver economy of 320 million seniors and family-memory preservation, replacing costly, slow, labor-intensive memoir services",
             "Vision: become the professional enablement platform for personal documentaries and build the world's largest library of authentic life stories"
           ]
