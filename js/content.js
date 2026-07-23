@@ -286,7 +286,7 @@ window.CONTENT = {
           name: "志愿者 · 笃学助飞韶关志教",
           role: "2026.07.11 - 2026.07.21",
           detail:
-            "在韶关乐昌市坪梅中学担任笃学助飞工作室英语戏剧组小老师，带领的小组获得最佳成果奖。结合个人超文化项目实践学习，港科广跨学科融合教育，为学生带来了愉快又前沿的学习方式。结束时，我收到了孩子们的一封封信件，表达他们从自卑到自信，害怕到勇敢这一程转变生出的感恩之心。",
+            "在韶关乐昌市坪梅中学担任笃学助飞工作室英语戏剧组小老师，带领的小组获得最佳成果奖。结合个人超文化项目实践学习，港科广跨学科融合教育，为学生带来了愉快又前沿的学习方式。结束时，我收到了孩子们的一封封信件，表达他们从自卑到自信，害怕到勇敢这一程转变生出的感恩之心。这一程充满感动，质朴而真诚的相处使得短暂的相遇令人留恋。与其说我们的付出为他们播下希望的种子，不如说他们的变化点燃了我心中教育的光。",
           images: [
             { src: "photos/volunteer/duxue-shaoguan-web.jpg", alt: "笃学助飞韶关志教" },
             { src: "photos/volunteer/first-place-web.jpg", alt: "第一名" },
@@ -670,7 +670,7 @@ window.CONTENT = {
           name: "Volunteer · Duxue Zhufei Teaching in Shaoguan",
           role: "Jul 11 - Jul 21, 2026",
           detail:
-            "Served as a junior teacher for the English drama group of Duxue Zhufei Studio at Pingmei Middle School in Lechang, Shaoguan. The group I led won the Best Outcome Award. Drawing on intercultural project practice and HKUST(GZ)'s interdisciplinary education, I brought students an enjoyable and forward-looking way of learning. At the end, I received letters from the children expressing gratitude for their journey from self-doubt to confidence, and from fear to courage.",
+            "Served as a junior teacher for the English drama group of Duxue Zhufei Studio at Pingmei Middle School in Lechang, Shaoguan. The group I led won the Best Outcome Award. Drawing on intercultural project practice and HKUST(GZ)'s interdisciplinary education, I brought students an enjoyable and forward-looking way of learning. At the end, I received letters from the children expressing gratitude for their journey from self-doubt to confidence, and from fear to courage. The experience was deeply moving — sincere and unpretentious connections made a brief encounter linger in the heart. Rather than saying our efforts planted seeds of hope in them, it was their transformation that kindled the light of education in me.",
           images: [
             { src: "photos/volunteer/duxue-shaoguan-web.jpg", alt: "Duxue Zhufei teaching in Shaoguan" },
             { src: "photos/volunteer/first-place-web.jpg", alt: "First place" },
