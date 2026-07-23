@@ -1,4 +1,5 @@
 // 全站中英双语文案。修改内容只需编辑此文件。
+// cache-bust: 2026-07-23
 // 证书板块的证书清单在 certs/certs.js 里维护。
 window.CONTENT = {
   zh: {
