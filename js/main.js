@@ -210,10 +210,16 @@
             return '<img src="' + img.src + '" alt="' + (img.alt || "") + '" loading="lazy" />';
           }).join("") + "</div>"
         : "";
+      var links = (it.links && it.links.length)
+        ? '<div class="card__links">' + it.links.map(function (link) {
+            return '<a class="card__link" href="' + link.href + '" target="_blank" rel="noopener">' +
+              (link.label || link.href) + "</a>";
+          }).join("") + "</div>"
+        : "";
       return '<div class="card anim' + (it.images ? " card--gallery" : "") + '"><p class="card__name">' + it.name +
         '</p><p class="card__role">' + it.role +
         '</p>' + (it.detail ? '<p class="card__detail">' + it.detail + "</p>" : "") +
-        bullets + images + "</div>";
+        bullets + images + links + "</div>";
     }).join("");
   }
 

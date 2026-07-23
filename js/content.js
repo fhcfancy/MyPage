@@ -282,6 +282,21 @@ window.CONTENT = {
           ]
         },
         {
+          name: "志愿者 · 笃学助飞韶关志教",
+          role: "2026.07.11 - 2026.07.21",
+          detail:
+            "在韶关乐昌市坪梅中学担任笃学助飞工作室英语戏剧组小老师，带领的小组获得最佳成果奖。结合个人超文化项目实践学习，港科广跨学科融合教育，为学生带来了愉快又前沿的学习方式。结束时，我收到了孩子们的一封封信件，表达他们从自卑到自信，害怕到勇敢这一程转变生出的感恩之心。",
+          images: [
+            { src: "photos/volunteer/笃学助飞韶关志教-web.jpg", alt: "笃学助飞韶关志教" },
+            { src: "photos/volunteer/第一名-web.jpg", alt: "第一名" },
+            { src: "photos/volunteer/最佳成果奖-web.jpg", alt: "最佳成果奖" }
+          ],
+          links: [
+            { label: "微信报道一", href: "https://mp.weixin.qq.com/s/EFEO93-FGec3TDTFTzW4hQ" },
+            { label: "微信报道二", href: "https://mp.weixin.qq.com/s/YhAy-v_soygl-s4B5_LEDQ" }
+          ]
+        },
+        {
           name: "志愿者",
           role: "2021 至今",
           detail:
@@ -648,6 +663,21 @@ window.CONTENT = {
             "Grade 9: 70-90 → 106",
             "Strong one-on-one and one-to-many teaching experience",
             "IELTS speaking / small-group IELTS English training"
+          ]
+        },
+        {
+          name: "Volunteer · Duxue Zhufei Teaching in Shaoguan",
+          role: "Jul 11 - Jul 21, 2026",
+          detail:
+            "Served as a junior teacher for the English drama group of Duxue Zhufei Studio at Pingmei Middle School in Lechang, Shaoguan. The group I led won the Best Outcome Award. Drawing on intercultural project practice and HKUST(GZ)'s interdisciplinary education, I brought students an enjoyable and forward-looking way of learning. At the end, I received letters from the children expressing gratitude for their journey from self-doubt to confidence, and from fear to courage.",
+          images: [
+            { src: "photos/volunteer/笃学助飞韶关志教-web.jpg", alt: "Duxue Zhufei teaching in Shaoguan" },
+            { src: "photos/volunteer/第一名-web.jpg", alt: "First place" },
+            { src: "photos/volunteer/最佳成果奖-web.jpg", alt: "Best Outcome Award" }
+          ],
+          links: [
+            { label: "WeChat article 1", href: "https://mp.weixin.qq.com/s/EFEO93-FGec3TDTFTzW4hQ" },
+            { label: "WeChat article 2", href: "https://mp.weixin.qq.com/s/YhAy-v_soygl-s4B5_LEDQ" }
           ]
         },
         {
