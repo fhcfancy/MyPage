@@ -162,7 +162,10 @@ window.CONTENT = {
           name: "法国超文化人类学研学",
           role: "成员 · 2025.05 - 2025.06",
           detail:
-            "深度探访法国（尤其是巴黎）文化地标，理解法国文化遗产；调研当地习俗与实践，培养跨文化认知与适应能力；反思人类共通价值，发展超文化视角与全球责任感。"
+            "深度探访法国（尤其是巴黎）文化地标，理解法国文化遗产；调研当地习俗与实践，培养跨文化认知与适应能力；反思人类共通价值，发展超文化视角与全球责任感。",
+          images: [
+            { src: "photos/study/transcultural-symbiosis-web.jpg", alt: "超文化共生" }
+          ]
         }
       ],
       contest: [
@@ -542,7 +545,10 @@ window.CONTENT = {
           name: "France Transcultural Anthropology Study",
           role: "Member · Apr - Jun 2025",
           detail:
-            "Explored France's cultural landmarks (especially Paris) to understand cultural heritage; researched local customs to strengthen cross-cultural competence; reflected on universal human values to cultivate a transcultural perspective and global responsibility."
+            "Explored France's cultural landmarks (especially Paris) to understand cultural heritage; researched local customs to strengthen cross-cultural competence; reflected on universal human values to cultivate a transcultural perspective and global responsibility.",
+          images: [
+            { src: "photos/study/transcultural-symbiosis-web.jpg", alt: "Transcultural Symbiosis" }
+          ]
         }
       ],
       contest: [

@@ -104,6 +104,8 @@
     el("projContestTitle").textContent = c.projects.contestTitle;
     el("projectStudyCards").innerHTML = richCards(c.projects.study);
     el("projectContestCards").innerHTML = richCards(c.projects.contest);
+    el("projectStudyCards").querySelectorAll(".card__gallery img").forEach(bindLightbox);
+    el("projectContestCards").querySelectorAll(".card__gallery img").forEach(bindLightbox);
 
     // 奖项
     el("awardEyebrow").textContent = c.awards.eyebrow;
