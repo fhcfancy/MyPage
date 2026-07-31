@@ -301,38 +301,40 @@
     render(lang);
   });
 
-  // 发邮件：尝试打开邮件客户端，同时复制邮箱，避免无客户端时点击无反应
+  // 发邮件：复制邮箱并尝试打开邮件客户端（无客户端时至少能复制成功）
   el("heroEmail").addEventListener("click", function (e) {
+    e.preventDefault();
     var btn = this;
     var email = btn.dataset.email || "fancyfhc@163.com";
     var mailto = "mailto:" + email;
     btn.setAttribute("href", mailto);
 
     function flashCopied() {
-      var original = btn.getAttribute("data-i18n-label") || btn.textContent;
-      if (!btn.getAttribute("data-i18n-label")) btn.setAttribute("data-i18n-label", original);
       var isEn = (localStorage.getItem("lang") || "zh") === "en";
+      var label = isEn ? "Email me" : "发邮件";
+      var c = window.CONTENT[localStorage.getItem("lang") || "zh"];
+      if (c && c.hero && c.hero.email) label = c.hero.email;
       btn.textContent = isEn ? "Email copied" : "已复制邮箱";
       btn.classList.add("btn--copied");
       clearTimeout(btn._copyTimer);
       btn._copyTimer = setTimeout(function () {
-        var c = window.CONTENT[localStorage.getItem("lang") || "zh"];
-        btn.textContent = (c && c.hero && c.hero.email) || original;
+        var latest = window.CONTENT[localStorage.getItem("lang") || "zh"];
+        btn.textContent = (latest && latest.hero && latest.hero.email) || label;
         btn.classList.remove("btn--copied");
       }, 1800);
     }
 
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(email).then(flashCopied).catch(function () {
-        // clipboard 失败时仍走 mailto
-      });
-    }
-
-    // 显式触发 mailto（部分浏览器对纯 href 点击无响应）
-    try {
+    var openMail = function () {
       window.location.href = mailto;
-    } catch (err) {}
-    // 不 preventDefault，保留默认行为作为兜底
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(function () {
+        flashCopied();
+        openMail();
+      }).catch(openMail);
+    } else {
+      openMail();
+    }
   });
 
   // 移动端菜单
