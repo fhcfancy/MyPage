@@ -50,7 +50,16 @@
       .map(function (line) { return "<span>" + line + "</span>"; })
       .join("<br />");
     el("heroLinkedin").setAttribute("href", LINKEDIN);
-    el("heroEmail").setAttribute("href", "mailto:" + c.contact.items[0].value);
+    var emailItem = c.contact.items[0];
+    for (var ei = 0; ei < c.contact.items.length; ei++) {
+      var it = c.contact.items[ei];
+      if ((it.href && it.href.indexOf("mailto:") === 0) || it.label === "邮箱" || it.label === "Email") {
+        emailItem = it;
+        break;
+      }
+    }
+    el("heroEmail").setAttribute("href", emailItem.href || ("mailto:" + emailItem.value));
+    el("heroEmail").dataset.email = emailItem.value;
 
     // 招募
     el("recruitEyebrow").textContent = c.recruit.eyebrow;
@@ -290,6 +299,40 @@
     lang = lang === "zh" ? "en" : "zh";
     localStorage.setItem("lang", lang);
     render(lang);
+  });
+
+  // 发邮件：尝试打开邮件客户端，同时复制邮箱，避免无客户端时点击无反应
+  el("heroEmail").addEventListener("click", function (e) {
+    var btn = this;
+    var email = btn.dataset.email || "fancyfhc@163.com";
+    var mailto = "mailto:" + email;
+    btn.setAttribute("href", mailto);
+
+    function flashCopied() {
+      var original = btn.getAttribute("data-i18n-label") || btn.textContent;
+      if (!btn.getAttribute("data-i18n-label")) btn.setAttribute("data-i18n-label", original);
+      var isEn = (localStorage.getItem("lang") || "zh") === "en";
+      btn.textContent = isEn ? "Email copied" : "已复制邮箱";
+      btn.classList.add("btn--copied");
+      clearTimeout(btn._copyTimer);
+      btn._copyTimer = setTimeout(function () {
+        var c = window.CONTENT[localStorage.getItem("lang") || "zh"];
+        btn.textContent = (c && c.hero && c.hero.email) || original;
+        btn.classList.remove("btn--copied");
+      }, 1800);
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(flashCopied).catch(function () {
+        // clipboard 失败时仍走 mailto
+      });
+    }
+
+    // 显式触发 mailto（部分浏览器对纯 href 点击无响应）
+    try {
+      window.location.href = mailto;
+    } catch (err) {}
+    // 不 preventDefault，保留默认行为作为兜底
   });
 
   // 移动端菜单
