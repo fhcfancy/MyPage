@@ -60,5 +60,17 @@ window.CERTS = [
       name: "Vibe Coding with Cursor AI",
       desc: "Coursera / Scrimba certificate. Learned to build and debug with Cursor AI for vibe coding workflows."
     }
+  },
+  {
+    img: "IBM-GenAI-web.jpg",
+    link: "https://coursera.org/share/ddeafbb48c20d874dd7d934cf0abc95e",
+    zh: {
+      name: "Develop Generative AI Applications: Get Started",
+      desc: "Coursera / IBM 结业证书。学习用 LangChain、提示工程与 Flask 开发生成式 AI 应用。"
+    },
+    en: {
+      name: "Develop Generative AI Applications: Get Started",
+      desc: "Coursera / IBM certificate. Learned to build generative AI apps with LangChain, prompt engineering, and Flask."
+    }
   }
 ];
