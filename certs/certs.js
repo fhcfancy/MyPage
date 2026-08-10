@@ -40,6 +40,7 @@ window.CERTS = [
     }
   },
   {
+    img: "IBM-SQL-web.jpg",
     link: "https://www.coursera.org/account/accomplishments/verify/5UTNYIBBJUJP",
     zh: {
       name: "Databases and SQL for Data Science with Python",
@@ -51,6 +52,7 @@ window.CERTS = [
     }
   },
   {
+    img: "Vibe-Coding-web.jpg",
     link: "https://www.coursera.org/account/accomplishments/verify/4DOPI31EMOOD",
     zh: {
       name: "Vibe Coding with Cursor AI",
