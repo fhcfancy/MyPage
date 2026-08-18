@@ -20,6 +20,7 @@
     zh: {
       title: "海宝助手",
       subtitle: "我会根据主页公开内容回答你",
+      buttonLabel: "问问海宝吧😜！",
       placeholder: "问我任何关于这个主页的问题...",
       send: "发送",
       openAria: "打开海宝助手",
@@ -32,6 +33,7 @@
     en: {
       title: "Haibao Assistant",
       subtitle: "I answer from this page's public info",
+      buttonLabel: "Ask HeyBaby 🥰!",
       placeholder: "Ask me anything about this page...",
       send: "Send",
       openAria: "Open Haibao assistant",
@@ -263,6 +265,8 @@
     var l = locale[lang];
     titleEl.textContent = l.title;
     subtitleEl.textContent = l.subtitle;
+    var helperText = toggleBtn.querySelector(".helper-btn__text");
+    if (helperText) helperText.textContent = l.buttonLabel;
     inputEl.placeholder = l.placeholder;
     sendEl.textContent = l.send;
     toggleBtn.setAttribute("aria-label", l.openAria);
