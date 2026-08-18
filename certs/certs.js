@@ -74,5 +74,17 @@ window.CERTS = [
       name: "Develop Generative AI Applications: Get Started",
       desc: "Coursera / IBM certificate. Learned to build generative AI apps with LangChain, prompt engineering, and Flask."
     }
+  },
+  {
+    img: "IBM-RAG-web.jpg",
+    link: "https://coursera.org/share/1b74449e73130d86bba72e5f466a1a55",
+    zh: {
+      name: "Build RAG Applications: Get Started",
+      desc: "Coursera / IBM 结业证书。学习用 LangChain、LlamaIndex 与 Gradio 构建检索增强生成（RAG）应用。"
+    },
+    en: {
+      name: "Build RAG Applications: Get Started",
+      desc: "Coursera / IBM certificate. Learned to build RAG applications with LangChain, LlamaIndex, and Gradio."
+    }
   }
 ];
