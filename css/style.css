@@ -132,7 +132,7 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  border: 1px solid rgba(150, 128, 226, 0.32);
+  border: none;
   border-radius: 980px;
   background:
     linear-gradient(135deg, #ff8abb 0%, #b897ff 48%, #7db3ff 100%);
@@ -140,8 +140,7 @@ a { color: inherit; text-decoration: none; }
   cursor: pointer;
   padding: 0 13px 0 11px;
   box-shadow:
-    0 6px 14px rgba(122, 92, 216, 0.18),
-    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 6px 14px rgba(122, 92, 216, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
@@ -150,8 +149,7 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(-1px);
   filter: saturate(1.06) brightness(1.02);
   box-shadow:
-    0 9px 18px rgba(122, 92, 216, 0.24),
-    0 0 0 1px rgba(255, 255, 255, 0.16),
+    0 8px 16px rgba(122, 92, 216, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 .helper-btn__emoji { font-size: 1.02rem; transform: translateY(-0.5px); }
@@ -164,10 +162,9 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
 }
 [data-theme="dark"] .helper-btn {
-  border-color: rgba(177, 165, 247, 0.34);
+  border: none;
   box-shadow:
-    0 8px 16px rgba(33, 18, 69, 0.32),
-    0 0 0 1px rgba(167, 150, 246, 0.14),
+    0 8px 16px rgba(33, 18, 69, 0.26),
     inset 0 1px 0 rgba(255, 255, 255, 0.32);
 }
 .lang-text { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.4px; }
