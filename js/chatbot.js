@@ -19,26 +19,26 @@
   var locale = {
     zh: {
       title: "海宝助手",
-      subtitle: "我会根据主页公开内容回答你",
+      subtitle: "我会尽力解答你想了解主人的问题～",
       buttonLabel: "问问海宝吧😜！",
       placeholder: "问我任何关于这个主页的问题...",
       send: "发送",
       openAria: "打开海宝助手",
       closeAria: "关闭海宝助手",
-      hello: "你好呀，我是海宝助手 🫧\n我只基于这个主页已公开的信息回答。你可以试试下面的问题：",
+      hello: "你好呀，我是海潮的助手海宝 🫧\n我超级喜欢我的主人，很高兴能为你解答关于她的问题🙋🏻‍♀️，一定知无不言，言无不尽～你可以试试下面的问题：",
       unknown: "我暂时没有在主页内容里找到这条信息。你可以换个问法，或者问我教育、项目、证书、志愿经历这些内容～",
       intro: "我在主页里找到了这些相关信息：",
       chips: ["你的研究方向是什么？", "你最近在做什么项目？", "你有哪些证书？", "怎么联系你？"]
     },
     en: {
       title: "Haibao Assistant",
-      subtitle: "I answer from this page's public info",
+      subtitle: "I will do my best to answer what you want to know about my owner~",
       buttonLabel: "Ask HeyBaby 🥰!",
       placeholder: "Ask me anything about this page...",
       send: "Send",
       openAria: "Open Haibao assistant",
       closeAria: "Close Haibao assistant",
-      hello: "Hi, I'm Haibao Assistant 🫧\nI answer only from the public information on this page. Try one of these:",
+      hello: "Hi, I'm Haichao's assistant, Haibao 🫧\nI absolutely adore my owner and I'm so happy to answer your questions about her 🙋🏻‍♀️. I'll share everything I know—try one of these:",
       unknown: "I couldn't find that in the page content yet. Try asking about education, projects, certificates, volunteering, or contact info.",
       intro: "Here is what I found on this page:",
       chips: ["What's your research focus?", "What projects are you building?", "What certificates do you have?", "How can I contact you?"]
