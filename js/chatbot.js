@@ -31,14 +31,14 @@
       chips: ["你的研究方向是什么？", "你最近在做什么项目？", "你有哪些证书？", "怎么联系你？"]
     },
     en: {
-      title: "Haibao Assistant",
+      title: "HeyBaby Assistant",
       subtitle: "I will do my best to answer what you want to know about my owner~",
       buttonLabel: "Ask HeyBaby 🥰!",
       placeholder: "Ask me anything about this page...",
       send: "Send",
-      openAria: "Open Haibao assistant",
-      closeAria: "Close Haibao assistant",
-      hello: "Hi, I'm Haichao's assistant, Haibao 🫧\nI absolutely adore my owner and I'm so happy to answer your questions about her 🙋🏻‍♀️. I'll share everything I know—try one of these:",
+      openAria: "Open HeyBaby assistant",
+      closeAria: "Close HeyBaby assistant",
+      hello: "Hi, I'm Haichao's assistant, HeyBaby 🫧\nI absolutely adore my owner and I'm so happy to answer your questions about her 🙋🏻‍♀️. I'll share everything I know—try one of these:",
       unknown: "I couldn't find that in the page content yet. Try asking about education, projects, certificates, volunteering, or contact info.",
       intro: "Here is what I found on this page:",
       chips: ["What's your research focus?", "What projects are you building?", "What certificates do you have?", "How can I contact you?"]
@@ -214,6 +214,7 @@
   function appendMessage(role, text, sources) {
     var bubble = document.createElement("div");
     bubble.className = "helper-chat__msg " + (role === "user" ? "helper-chat__msg--user" : "helper-chat__msg--bot");
+    bubble.dataset.role = role;
     bubble.textContent = text;
     messagesEl.appendChild(bubble);
 
@@ -271,7 +272,17 @@
     sendEl.textContent = l.send;
     toggleBtn.setAttribute("aria-label", l.openAria);
     closeBtn.setAttribute("aria-label", l.closeAria);
+    refreshGreeting(lang);
     renderChips(lang);
+  }
+
+  function refreshGreeting(lang) {
+    var bubbles = messagesEl.querySelectorAll(".helper-chat__msg");
+    if (bubbles.length !== 1) return;
+    var only = bubbles[0];
+    if (only.dataset.role === "bot") {
+      only.textContent = locale[lang].hello;
+    }
   }
 
   function openChat() {
