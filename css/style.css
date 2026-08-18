@@ -126,6 +126,10 @@ a { color: inherit; text-decoration: none; }
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .icon-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+.helper-btn__emoji {
+  font-size: 1.05rem;
+  transform: translateY(-0.5px);
+}
 .lang-text { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.4px; }
 
 .icon { display: none; }
@@ -787,6 +791,149 @@ a.paper-list__title:hover {
   color: #6a3d7a;
 }
 
+/* ===== Haibao assistant ===== */
+.helper-chat {
+  position: fixed;
+  right: 24px;
+  top: 78px;
+  width: min(92vw, 370px);
+  max-height: min(76vh, 620px);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-hover);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 170;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px) scale(0.98);
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+.helper-chat.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+.helper-chat__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 14px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.helper-chat__title-wrap { display: flex; align-items: center; gap: 10px; }
+.helper-chat__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--grad-soft);
+  border: 1px solid var(--border);
+}
+.helper-chat__title { font-size: 0.95rem; font-weight: 700; line-height: 1.15; }
+.helper-chat__subtitle { font-size: 0.76rem; color: var(--text-faint); margin-top: 2px; }
+.helper-chat__close {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-soft);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.helper-chat__messages {
+  padding: 14px 14px 10px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 180px;
+}
+.helper-chat__msg {
+  max-width: 88%;
+  padding: 9px 12px;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+.helper-chat__msg--user {
+  align-self: flex-end;
+  color: #fff;
+  background: var(--grad);
+}
+.helper-chat__msg--bot {
+  align-self: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.helper-chat__src {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.helper-chat__src a {
+  font-size: 0.75rem;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-radius: 980px;
+  padding: 2px 8px;
+  background: var(--accent-soft);
+}
+.helper-chat__chips {
+  padding: 0 14px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.helper-chat__chip {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-soft);
+  border-radius: 980px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+.helper-chat__form {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--border);
+}
+.helper-chat__input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 0.88rem;
+  background: var(--bg-card);
+  color: var(--text);
+  outline: none;
+}
+.helper-chat__input:focus { border-color: rgba(150, 120, 220, 0.55); }
+.helper-chat__send {
+  border: none;
+  border-radius: 12px;
+  padding: 0 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--grad);
+  cursor: pointer;
+}
+
 [data-theme="dark"] .hobby-tag:nth-child(7n+1),
 [data-theme="dark"] .hobby-tag:nth-child(7n+2),
 [data-theme="dark"] .hobby-tag:nth-child(7n+3),
@@ -901,6 +1048,12 @@ a.paper-list__title:hover {
 @media (max-width: 768px) {
   .hero__slogan { font-size: clamp(0.68rem, 3.1vw, 0.98rem); letter-spacing: 0; }
   .hero__tagline { font-size: clamp(0.68rem, 2.9vw, 1rem); letter-spacing: 0; }
+  .helper-chat {
+    right: 14px;
+    top: 72px;
+    width: calc(100vw - 28px);
+    max-height: 70vh;
+  }
 }
 @media (max-width: 520px) {
   .section { padding: 68px 20px; }

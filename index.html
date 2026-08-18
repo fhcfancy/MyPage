@@ -34,6 +34,9 @@
           <svg class="icon icon--sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
           <svg class="icon icon--moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
+        <button class="icon-btn helper-btn" id="helperToggle" aria-label="Open assistant" title="海宝助手">
+          <span class="helper-btn__emoji" aria-hidden="true">🫧</span>
+        </button>
         <button class="icon-btn nav__burger" id="burger" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
@@ -191,15 +194,36 @@
     <p id="footerText"></p>
   </footer>
 
+  <!-- Haibao assistant -->
+  <section class="helper-chat" id="helperChat" aria-hidden="true">
+    <div class="helper-chat__head">
+      <div class="helper-chat__title-wrap">
+        <span class="helper-chat__avatar" aria-hidden="true">🫧</span>
+        <div>
+          <p class="helper-chat__title" id="helperTitle">海宝助手</p>
+          <p class="helper-chat__subtitle" id="helperSubtitle">我会根据主页内容回答你</p>
+        </div>
+      </div>
+      <button class="helper-chat__close" id="helperClose" aria-label="Close assistant">&times;</button>
+    </div>
+    <div class="helper-chat__messages" id="helperMessages"></div>
+    <div class="helper-chat__chips" id="helperChips"></div>
+    <form class="helper-chat__form" id="helperForm">
+      <input class="helper-chat__input" id="helperInput" type="text" autocomplete="off" />
+      <button class="helper-chat__send" id="helperSend" type="submit">发送</button>
+    </form>
+  </section>
+
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
     <img class="lightbox__img" id="lightboxImg" src="" alt="" />
   </div>
 
-  <script src="js/content.js?v=20260818b"></script>
-  <script src="photos/photos.js?v=20260818b"></script>
-  <script src="certs/certs.js?v=20260818b"></script>
-  <script src="js/main.js?v=20260818b"></script>
+  <script src="js/content.js?v=20260818c"></script>
+  <script src="photos/photos.js?v=20260818c"></script>
+  <script src="certs/certs.js?v=20260818c"></script>
+  <script src="js/main.js?v=20260818c"></script>
+  <script src="js/chatbot.js?v=20260818c"></script>
 </body>
 </html>
