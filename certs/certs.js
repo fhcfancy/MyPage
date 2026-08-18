@@ -77,7 +77,7 @@ window.CERTS = [
   },
   {
     img: "IBM-RAG-web.jpg",
-    link: "https://coursera.org/share/1b74449e73130d86bba72e5f466a1a55",
+    link: "https://coursera.org/share/e2495aac66ee28296a03dd5a3e701f7a",
     zh: {
       name: "Build RAG Applications: Get Started",
       desc: "Coursera / IBM 结业证书。学习用 LangChain、LlamaIndex 与 Gradio 构建检索增强生成（RAG）应用。"
