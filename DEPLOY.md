@@ -88,6 +88,14 @@ API_ENABLED = false
 - `DEEPSEEK_API_KEY`
 - `ALLOWED_ORIGINS`（你的 GitHub Pages 地址）
 
+**手机端推荐链接（iOS / Android 最稳定）：**
+
+```text
+https://my-page-eight-alpha.vercel.app/
+```
+
+此链接与 API **同源**，无跨域问题。GitHub Pages 链接在部分手机上可能无法调用 AI。
+
 ## 6. 手机端（iOS / Android）
 
 海宝在手机上会自动：

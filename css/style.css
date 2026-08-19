@@ -958,6 +958,20 @@ a.paper-list__title:hover {
   flex-wrap: wrap;
   gap: 7px;
 }
+.helper-chat__banner {
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255, 196, 220, 0.28);
+  border: 1px solid var(--border);
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: var(--text-soft);
+}
+.helper-chat__banner a {
+  color: var(--accent);
+  font-weight: 700;
+  margin-left: 4px;
+}
 .helper-chat__chip {
   border: 1px solid var(--border);
   background: var(--bg-card);

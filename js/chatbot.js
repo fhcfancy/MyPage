@@ -34,7 +34,7 @@
       intro: "我在主页里找到了这些相关信息：",
       thinking: "思考中…",
       apiError: "海宝暂时连不上大脑了，我先根据主页内容帮你查一下～",
-      apiErrorMobile: "网络有点慢，我先根据主页帮你查～",
+      apiErrorMobile: "网络有点慢，请先试试用此链接打开：\nhttps://my-page-eight-alpha.vercel.app/",
       chips: ["你的研究方向是什么？", "你最近在做什么项目？", "你有哪些证书？", "怎么联系你？"]
     },
     en: {
@@ -51,7 +51,7 @@
       intro: "Here is what I found on this page:",
       thinking: "Thinking…",
       apiError: "HeyBaby can't reach the AI backend right now — I'll search the page for you instead.",
-      apiErrorMobile: "Network is a bit slow — I'll search the page for you~",
+      apiErrorMobile: "Network is slow. Try opening:\nhttps://my-page-eight-alpha.vercel.app/",
       chips: ["What's your research focus?", "What projects are you building?", "What certificates do you have?", "How can I contact you?"]
     }
   };
@@ -73,7 +73,27 @@
 
   function getApiUrl() {
     if (!isApiEnabled()) return "";
-    return String(config.apiUrl || "").trim();
+    var sameOrigin = String(config.apiUrl || "/api/chat").trim();
+    var remote = String(config.remoteApiUrl || "").trim();
+    var host = window.location.hostname || "";
+    var vercelHost = String(config.vercelHost || "").trim();
+
+    if (sameOrigin.charAt(0) === "/" && (host.indexOf("vercel.app") !== -1 || (vercelHost && host === vercelHost))) {
+      return sameOrigin;
+    }
+    if (remote) return remote;
+    if (sameOrigin.indexOf("http") === 0) return sameOrigin;
+    return "https://" + (vercelHost || "my-page-eight-alpha.vercel.app") + sameOrigin;
+  }
+
+  function isCrossOriginApi() {
+    var url = getApiUrl();
+    if (!url || url.charAt(0) === "/") return false;
+    try {
+      return new URL(url, window.location.href).origin !== window.location.origin;
+    } catch (err) {
+      return true;
+    }
   }
 
   function getPersonality(lang) {
@@ -396,12 +416,14 @@
       pushFact(facts, "research", p.title, p.venue || "", p.link || "#research", ["paper", "research", "论文"]);
     });
 
-    (c.campus.campus || []).forEach(function (it) {
-      pushFact(facts, "campus", it.name, it.role + "；" + (it.detail || ""), "#campus", ["campus", "校园"]);
-    });
-    (c.campus.society || []).forEach(function (it) {
-      pushFact(facts, "society", it.name, it.role + "；" + (it.detail || "") + "；" + (it.bullets || []).join("；"), "#campus", ["society", "社会", "volunteer"]);
-    });
+    if (c.campus) {
+      (c.campus.campus || []).forEach(function (it) {
+        pushFact(facts, "campus", it.name, it.role + "；" + (it.detail || ""), "#campus", ["campus", "校园"]);
+      });
+      (c.campus.society || []).forEach(function (it) {
+        pushFact(facts, "society", it.name, it.role + "；" + (it.detail || "") + "；" + (it.bullets || []).join("；"), "#campus", ["society", "社会", "volunteer"]);
+      });
+    }
 
     (c.awards.groups || []).forEach(function (g) {
       pushFact(facts, "awards", g.group, (g.items || []).join("；"), "#awards", ["awards", "奖项"]);
@@ -732,7 +754,9 @@
     var lang = forcedLang || currentLang();
     var l = locale[lang];
     titleEl.textContent = l.title;
-    subtitleEl.textContent = isApiEnabled() ? l.subtitle : l.subtitleOffline;
+    subtitleEl.textContent = isApiEnabled()
+      ? (l.subtitle + (isMobileClient() && isCrossOriginApi() ? (lang === "zh" ? "（手机建议用 Vercel 链接）" : " (mobile: use Vercel link)") : ""))
+      : l.subtitleOffline;
     var helperText = toggleBtn.querySelector(".helper-btn__text");
     if (helperText) helperText.textContent = l.buttonLabel;
     toggleBtn.setAttribute("title", l.title);
@@ -756,6 +780,27 @@
     }
   }
 
+  function showMobileStableLinkHint() {
+    if (!isMobileClient() || !isCrossOriginApi()) return;
+    if (messagesEl.querySelector(".helper-chat__banner")) return;
+    var lang = currentLang();
+    var banner = document.createElement("div");
+    banner.className = "helper-chat__banner";
+    var text = document.createElement("span");
+    text.textContent = lang === "zh"
+      ? "手机端 AI 在此链接可能不稳定，建议用："
+      : "For reliable AI on mobile, open:";
+    var link = document.createElement("a");
+    link.href = "https://my-page-eight-alpha.vercel.app/";
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = lang === "zh" ? "稳定版主页" : "stable site link";
+    banner.appendChild(text);
+    banner.appendChild(link);
+    messagesEl.insertBefore(banner, messagesEl.firstChild);
+    scrollToBottom();
+  }
+
   function openChat() {
     chat.classList.add("open");
     chat.setAttribute("aria-hidden", "false");
@@ -763,6 +808,7 @@
       appendMessage("bot", locale[currentLang()].hello, []);
       openedOnce = true;
     }
+    showMobileStableLinkHint();
     if (isMobileClient()) {
       document.body.classList.add("helper-chat-open");
       window.setTimeout(function () { inputEl.focus(); }, 120);

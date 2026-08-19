@@ -17,13 +17,7 @@ function parseAllowedOrigins() {
   return raw.split(",").map(function (s) { return s.trim(); }).filter(Boolean);
 }
 
-function resolveCorsOrigin(req) {
-  var allowed = parseAllowedOrigins();
-  var origin = req.headers.origin || "";
-  if (allowed.indexOf("*") >= 0) return "*";
-  if (origin && allowed.indexOf(origin) >= 0) return origin;
-  if (origin && /\.github\.io$/i.test(origin.replace(/^https:\/\//, ""))) return origin;
-  if (origin && /^https:\/\//.test(origin)) return origin;
+function resolveCorsOrigin() {
   return "*";
 }
 
@@ -36,7 +30,7 @@ function setCorsHeaders(res, origin) {
 }
 
 module.exports = async function handler(req, res) {
-  var origin = resolveCorsOrigin(req);
+  var origin = resolveCorsOrigin();
   setCorsHeaders(res, origin);
 
   if (req.method === "OPTIONS") {
