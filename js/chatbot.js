@@ -22,7 +22,7 @@
   var locale = {
     zh: {
       title: "海宝助手",
-      subtitle: "我会根据主页内容回答你～",
+      subtitle: "我会尽力解答你想了解主人的问题～",
       buttonLabel: "问问海宝吧😜！",
       placeholder: "问我任何关于这个主页的问题...",
       send: "发送",
