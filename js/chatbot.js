@@ -100,18 +100,66 @@
   }
 
   function getFetchTimeout() {
-    return isMobileClient() ? 28000 : 45000;
+    return isMobileClient() ? 35000 : 45000;
   }
 
   function fetchWithTimeout(url, options, timeoutMs) {
-    if (typeof AbortController === "undefined") return fetch(url, options);
-    var controller = new AbortController();
-    var timer = window.setTimeout(function () {
-      controller.abort();
-    }, timeoutMs || 45000);
-    var next = Object.assign({}, options, { signal: controller.signal });
-    return fetch(url, next).finally(function () {
-      window.clearTimeout(timer);
+    return new Promise(function (resolve, reject) {
+      var finished = false;
+      var timer = window.setTimeout(function () {
+        if (finished) return;
+        finished = true;
+        reject(new Error("timeout"));
+      }, timeoutMs || 45000);
+
+      fetch(url, options).then(function (res) {
+        if (finished) return;
+        finished = true;
+        window.clearTimeout(timer);
+        resolve(res);
+      }).catch(function (err) {
+        if (finished) return;
+        finished = true;
+        window.clearTimeout(timer);
+        reject(err);
+      });
+    });
+  }
+
+  function xhrPostChat(apiUrl, payload, timeoutMs) {
+    return new Promise(function (resolve, reject) {
+      var finished = false;
+      var xhr = new XMLHttpRequest();
+      var timer = window.setTimeout(function () {
+        if (finished) return;
+        finished = true;
+        xhr.abort();
+        reject(new Error("timeout"));
+      }, timeoutMs || 35000);
+
+      xhr.open("POST", apiUrl, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4 || finished) return;
+        finished = true;
+        window.clearTimeout(timer);
+        if (xhr.status >= 200 && xhr.status < 300) {
+          try {
+            resolve(JSON.parse(xhr.responseText || "{}"));
+          } catch (err) {
+            reject(new Error("invalid json"));
+          }
+          return;
+        }
+        reject(new Error(xhr.responseText || ("HTTP " + xhr.status)));
+      };
+      xhr.onerror = function () {
+        if (finished) return;
+        finished = true;
+        window.clearTimeout(timer);
+        reject(new Error("network error"));
+      };
+      xhr.send(JSON.stringify(payload));
     });
   }
 
@@ -371,8 +419,9 @@
       .map(function (f) { return { fact: f, score: scoreFact(query, f) }; })
       .sort(function (a, b) { return b.score - a.score; });
 
-    var picked = facts.filter(function (it) { return it.score > 0; }).slice(0, 8);
-    if (!picked.length) picked = facts.slice(0, 6);
+    var limitFacts = isMobileClient() ? 4 : 8;
+    var picked = facts.filter(function (it) { return it.score > 0; }).slice(0, limitFacts);
+    if (!picked.length) picked = facts.slice(0, isMobileClient() ? 4 : 6);
 
     picked.forEach(function (it) {
       parts.push(it.fact.title + "：" + it.fact.text);
@@ -382,7 +431,8 @@
     if (extra.length) parts.push("# Extra\n" + extra.join("\n"));
 
     var text = parts.join("\n\n");
-    if (text.length > 7000) text = text.slice(0, 7000) + "\n…";
+    var limit = isMobileClient() ? 3500 : 7000;
+    if (text.length > limit) text = text.slice(0, limit) + "\n…";
     return text;
   }
 
@@ -517,21 +567,38 @@
     var apiUrl = getApiUrl();
     if (!apiUrl) return Promise.reject(new Error("API not configured"));
 
+    var langPack = locale[lang];
     var stream = useStreaming();
-    var bubble = thinkingBubble || createBotBubble(locale[lang].thinking);
+    var bubble = thinkingBubble || createBotBubble(langPack.thinking);
+    var payload = {
+      lang: lang,
+      stream: stream,
+      client: isMobileClient() ? "mobile" : "web",
+      personality: getPersonality(lang),
+      context: buildApiContext(query, lang),
+      messages: getConversationMessages()
+    };
+
+    function finishWithText(text) {
+      var answer = text || langPack.unknown;
+      bubble.textContent = answer;
+      bubble.classList.remove("helper-chat__msg--typing");
+      scrollToBottom();
+      return { text: answer, sources: [] };
+    }
+
+    if (isMobileClient()) {
+      return xhrPostChat(apiUrl, payload, getFetchTimeout()).then(function (data) {
+        return finishWithText(data && data.content);
+      });
+    }
 
     return fetchWithTimeout(apiUrl, {
       method: "POST",
       mode: "cors",
       credentials: "omit",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        lang: lang,
-        stream: stream,
-        personality: getPersonality(lang),
-        context: buildApiContext(query, lang),
-        messages: getConversationMessages()
-      })
+      body: JSON.stringify(payload)
     }, getFetchTimeout()).then(function (res) {
       if (!res.ok) {
         return res.text().then(function (text) {
@@ -541,11 +608,7 @@
 
       if (!stream || !res.body || typeof res.body.getReader !== "function") {
         return res.json().then(function (data) {
-          var text = (data && data.content) ? data.content : locale[lang].unknown;
-          bubble.textContent = text;
-          bubble.classList.remove("helper-chat__msg--typing");
-          scrollToBottom();
-          return { text: text, sources: [] };
+          return finishWithText(data && data.content);
         });
       }
 
@@ -558,7 +621,7 @@
         return reader.read().then(function (chunk) {
           if (chunk.done) {
             bubble.classList.remove("helper-chat__msg--typing");
-            if (!fullText.trim()) fullText = locale[lang].unknown;
+            if (!fullText.trim()) fullText = langPack.unknown;
             bubble.textContent = fullText;
             scrollToBottom();
             return { text: fullText, sources: [] };

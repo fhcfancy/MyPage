@@ -23,8 +23,8 @@ function resolveCorsOrigin(req) {
   if (allowed.indexOf("*") >= 0) return "*";
   if (origin && allowed.indexOf(origin) >= 0) return origin;
   if (origin && /\.github\.io$/i.test(origin.replace(/^https:\/\//, ""))) return origin;
-  if (!origin) return "*";
-  return allowed[0] || "*";
+  if (origin && /^https:\/\//.test(origin)) return origin;
+  return "*";
 }
 
 function setCorsHeaders(res, origin) {
@@ -62,6 +62,7 @@ module.exports = async function handler(req, res) {
   var personality = body.personality || "";
   var lang = body.lang === "en" ? "en" : "zh";
   var stream = body.stream !== false;
+  var maxTokens = body.client === "mobile" ? 500 : 900;
 
   if (!Array.isArray(messages) || !messages.length) {
     return res.status(400).json({ error: "messages array is required" });
@@ -87,7 +88,7 @@ module.exports = async function handler(req, res) {
     model: MODEL,
     messages: [{ role: "system", content: systemContent }].concat(messages),
     temperature: 0.7,
-    max_tokens: 900,
+    max_tokens: maxTokens,
     stream: stream
   };
 
