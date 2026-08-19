@@ -5,7 +5,7 @@
  * 海宝仍可用，会自动改用主页内容的本地搜索回答。
  */
 window.CHATBOT_CONFIG = {
-  enabled: true,
+  enabled: false,
   apiUrl: "https://my-page-eight-alpha.vercel.app/api/chat",
   stream: true
 };
