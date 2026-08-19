@@ -63,6 +63,7 @@
   }
 
   function getApiUrl() {
+    if (config.enabled === false) return "";
     return String(config.apiUrl || "").trim();
   }
 
