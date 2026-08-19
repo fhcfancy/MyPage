@@ -22,7 +22,9 @@ function resolveCorsOrigin(req) {
   var origin = req.headers.origin || "";
   if (allowed.indexOf("*") >= 0) return "*";
   if (origin && allowed.indexOf(origin) >= 0) return origin;
-  return allowed[0] || "";
+  if (origin && /\.github\.io$/i.test(origin.replace(/^https:\/\//, ""))) return origin;
+  if (!origin) return "*";
+  return allowed[0] || "*";
 }
 
 function setCorsHeaders(res, origin) {

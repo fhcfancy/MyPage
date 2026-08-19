@@ -34,6 +34,7 @@
       intro: "我在主页里找到了这些相关信息：",
       thinking: "思考中…",
       apiError: "海宝暂时连不上大脑了，我先根据主页内容帮你查一下～",
+      apiErrorMobile: "网络有点慢，我先根据主页帮你查～",
       chips: ["你的研究方向是什么？", "你最近在做什么项目？", "你有哪些证书？", "怎么联系你？"]
     },
     en: {
@@ -50,6 +51,7 @@
       intro: "Here is what I found on this page:",
       thinking: "Thinking…",
       apiError: "HeyBaby can't reach the AI backend right now — I'll search the page for you instead.",
+      apiErrorMobile: "Network is a bit slow — I'll search the page for you~",
       chips: ["What's your research focus?", "What projects are you building?", "What certificates do you have?", "How can I contact you?"]
     }
   };
@@ -81,17 +83,24 @@
 
   function useStreaming() {
     if (config.stream === false) return false;
-    var ua = navigator.userAgent || "";
-    var isIOS = /iPad|iPhone|iPod/.test(ua) ||
-      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-    if (isIOS) return false;
-    if (/Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(ua)) return false;
-    if (window.matchMedia && window.matchMedia("(max-width: 768px)").matches) return false;
+    if (isMobileClient()) return false;
     try {
       return typeof ReadableStream !== "undefined" && !!Response.prototype.body;
     } catch (err) {
       return false;
     }
+  }
+
+  function isMobileClient() {
+    var ua = navigator.userAgent || "";
+    var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    if (isIOS || /Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(ua)) return true;
+    return !!(window.matchMedia && window.matchMedia("(max-width: 768px)").matches);
+  }
+
+  function getFetchTimeout() {
+    return isMobileClient() ? 28000 : 45000;
   }
 
   function fetchWithTimeout(url, options, timeoutMs) {
@@ -345,6 +354,38 @@
     return score;
   }
 
+  function buildApiContext(query, lang) {
+    var c = window.CONTENT && window.CONTENT[lang];
+    var parts = [];
+
+    if (c && c.hero) {
+      parts.push("# Profile\n" + c.hero.name + "\n" + (c.hero.introLines || []).join("\n"));
+    }
+    if (c && c.contact && c.contact.items) {
+      parts.push("# Contact\n" + c.contact.items.map(function (it) {
+        return it.label + "：" + it.value;
+      }).join("\n"));
+    }
+
+    var facts = buildFacts(lang)
+      .map(function (f) { return { fact: f, score: scoreFact(query, f) }; })
+      .sort(function (a, b) { return b.score - a.score; });
+
+    var picked = facts.filter(function (it) { return it.score > 0; }).slice(0, 8);
+    if (!picked.length) picked = facts.slice(0, 6);
+
+    picked.forEach(function (it) {
+      parts.push(it.fact.title + "：" + it.fact.text);
+    });
+
+    var extra = personalityConfig.extraKnowledge || [];
+    if (extra.length) parts.push("# Extra\n" + extra.join("\n"));
+
+    var text = parts.join("\n\n");
+    if (text.length > 7000) text = text.slice(0, 7000) + "\n…";
+    return text;
+  }
+
   function uniqueSources(items) {
     var seen = {};
     var out = [];
@@ -472,24 +513,26 @@
     return rest;
   }
 
-  function askDeepSeek(query, lang) {
+  function askDeepSeekRequest(query, lang, thinkingBubble) {
     var apiUrl = getApiUrl();
     if (!apiUrl) return Promise.reject(new Error("API not configured"));
 
     var stream = useStreaming();
-    var thinkingBubble = createBotBubble(locale[lang].thinking);
+    var bubble = thinkingBubble || createBotBubble(locale[lang].thinking);
 
     return fetchWithTimeout(apiUrl, {
       method: "POST",
+      mode: "cors",
+      credentials: "omit",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         lang: lang,
         stream: stream,
         personality: getPersonality(lang),
-        context: buildPageContext(lang),
+        context: buildApiContext(query, lang),
         messages: getConversationMessages()
       })
-    }, 45000).then(function (res) {
+    }, getFetchTimeout()).then(function (res) {
       if (!res.ok) {
         return res.text().then(function (text) {
           throw new Error(text || ("HTTP " + res.status));
@@ -499,8 +542,8 @@
       if (!stream || !res.body || typeof res.body.getReader !== "function") {
         return res.json().then(function (data) {
           var text = (data && data.content) ? data.content : locale[lang].unknown;
-          thinkingBubble.textContent = text;
-          thinkingBubble.classList.remove("helper-chat__msg--typing");
+          bubble.textContent = text;
+          bubble.classList.remove("helper-chat__msg--typing");
           scrollToBottom();
           return { text: text, sources: [] };
         });
@@ -514,9 +557,9 @@
       function pump() {
         return reader.read().then(function (chunk) {
           if (chunk.done) {
-            thinkingBubble.classList.remove("helper-chat__msg--typing");
+            bubble.classList.remove("helper-chat__msg--typing");
             if (!fullText.trim()) fullText = locale[lang].unknown;
-            thinkingBubble.textContent = fullText;
+            bubble.textContent = fullText;
             scrollToBottom();
             return { text: fullText, sources: [] };
           }
@@ -524,8 +567,8 @@
           buffer += decoder.decode(chunk.value, { stream: true });
           buffer = parseSseChunk(buffer, function (delta) {
             fullText += delta;
-            thinkingBubble.textContent = fullText;
-            thinkingBubble.classList.remove("helper-chat__msg--typing");
+            bubble.textContent = fullText;
+            bubble.classList.remove("helper-chat__msg--typing");
             scrollToBottom();
           });
           return pump();
@@ -533,19 +576,20 @@
       }
 
       return pump().catch(function () {
-        return res.json().then(function (data) {
-          var text = (data && data.content) ? data.content : locale[lang].unknown;
-          thinkingBubble.textContent = text;
-          thinkingBubble.classList.remove("helper-chat__msg--typing");
-          scrollToBottom();
-          return { text: text, sources: [] };
-        });
+        throw new Error("stream failed");
       });
-    }).catch(function (err) {
-      if (thinkingBubble && thinkingBubble.parentNode) {
-        thinkingBubble.parentNode.removeChild(thinkingBubble);
-      }
-      throw err;
+    });
+  }
+
+  function askDeepSeek(query, lang) {
+    var bubble = createBotBubble(locale[lang].thinking);
+    return askDeepSeekRequest(query, lang, bubble).catch(function () {
+      bubble.textContent = locale[lang].thinking;
+      bubble.classList.add("helper-chat__msg--typing");
+      return askDeepSeekRequest(query, lang, bubble);
+    }).catch(function () {
+      if (bubble && bubble.parentNode) bubble.parentNode.removeChild(bubble);
+      throw new Error("API failed");
     });
   }
 
@@ -632,7 +676,8 @@
       })
       .catch(function () {
         var local = buildLocalAnswer(query, lang);
-        appendMessage("bot", l.apiError + "\n\n" + local.text, local.sources);
+        var prefix = isMobileClient() ? l.apiErrorMobile : l.apiError;
+        appendMessage("bot", prefix + "\n\n" + local.text, local.sources);
         conversation.push({ role: "assistant", content: local.text });
       })
       .finally(function () {
