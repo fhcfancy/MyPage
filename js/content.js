@@ -47,7 +47,7 @@ window.CONTENT = {
           ]
         },
         {
-          name: "心镜 | Journey to Love",
+          name: "心镜｜Journey to Love",
           tagline: "为全人类创造私人定制的心灵成长之旅",
           points: [
             "面向 10-15 岁青少年的「AI 陪伴 + 游戏化成长 + SEL 情绪教育 + 家长联动」产品，切入国内空白的预防式情绪教育市场",
@@ -429,7 +429,7 @@ window.CONTENT = {
           ]
         },
         {
-          name: "Mind Mirror | Journey to Love",
+          name: "心镜｜Journey to Love",
           tagline: "A personalized journey of inner growth, for everyone",
           points: [
             "For ages 10-15: 'AI companionship + gamified growth + SEL emotional education + parent involvement', entering a blue-ocean market for preventive emotional education in China",
