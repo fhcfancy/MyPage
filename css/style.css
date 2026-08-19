@@ -906,6 +906,9 @@ a.paper-list__title:hover {
   flex-direction: column;
   gap: 10px;
   min-height: 180px;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 .helper-chat__msg {
   max-width: 88%;
@@ -1129,6 +1132,14 @@ a.paper-list__title:hover {
     bottom: max(14px, env(safe-area-inset-bottom));
     width: auto;
     max-height: min(72dvh, 620px);
+    z-index: 1000;
+  }
+  body.helper-chat-open {
+    overflow: hidden;
+    touch-action: none;
+  }
+  body.helper-chat-open .helper-chat {
+    touch-action: auto;
   }
 }
 @media (max-width: 520px) {

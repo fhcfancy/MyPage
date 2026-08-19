@@ -88,7 +88,20 @@ API_ENABLED = false
 - `DEEPSEEK_API_KEY`
 - `ALLOWED_ORIGINS`（你的 GitHub Pages 地址）
 
-## 6. 本地预览
+## 6. 手机端（iOS / Android）
+
+海宝在手机上会自动：
+
+- 使用 **非流式 API**（更稳定）
+- 优先 **XMLHttpRequest**，失败时自动切换 **fetch**
+- 精简上传内容，减少超时
+- 键盘弹出时自动调整小窗位置
+
+**Vercel 建议设置：** `ALLOWED_ORIGINS=*`（兼容性最好）
+
+测试请用 **Safari / Chrome** 打开 GitHub Pages 链接，微信内置浏览器可能拦截跨域请求。
+
+## 7. 本地预览
 
 ```bash
 cd /Users/carina/MyPage
@@ -97,7 +110,7 @@ python3 -m http.server 8000
 
 浏览器打开 http://localhost:8000
 
-## 7. 常用命令
+## 8. 常用命令
 
 ```bash
 git status          # 看未提交的改动
