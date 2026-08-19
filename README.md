@@ -84,6 +84,55 @@ git push -u origin main
 
 然后到 GitHub 仓库 Settings → Pages，Source 选 `main` 分支根目录，保存后即可获得访问链接。
 
+## 海宝助手（DeepSeek API）
+
+主页上的「海宝助手」支持两种模式：
+
+1. **未配置 API** — 使用主页内容的关键词匹配（离线兜底）
+2. **配置 DeepSeek API** — 通过 Vercel 小后端实时回答，并可自定义性格
+
+### 第一步：部署 Vercel 后端
+
+1. 注册 [Vercel](https://vercel.com)，导入本仓库（或只部署 `api/` 目录所在项目）
+2. 在 Vercel → Project → Settings → Environment Variables 添加：
+   - `DEEPSEEK_API_KEY` — 你的 DeepSeek API Key
+   - `ALLOWED_ORIGINS` — 允许访问的前端地址，例如：
+     `https://fhcfancy.github.io,http://localhost:8000`
+3. Deploy 完成后，记下 API 地址，形如：
+   `https://你的项目名.vercel.app/api/chat`
+
+本地调试（可选）：
+
+```bash
+npm i -g vercel
+cp .env.example .env   # 填入 DEEPSEEK_API_KEY
+vercel dev
+```
+
+### 第二步：前端连接 API
+
+编辑 `js/chatbot-config.js`：
+
+```js
+window.CHATBOT_CONFIG = {
+  apiUrl: "https://你的项目名.vercel.app/api/chat",
+  stream: true
+};
+```
+
+提交并 push 到 GitHub Pages 即可。
+
+### 第三步：训练海宝性格
+
+编辑 `js/chatbot-personality.js`：
+
+- `zh` / `en` — 系统提示词，控制说话风格
+- `extraKnowledge` — 主页没写、但希望海宝知道的补充信息
+
+改完后 push，GitHub Pages 会自动更新。
+
+> **安全提示**：API Key 只放在 Vercel 环境变量里，不要写进 `chatbot-config.js` 或任何前端文件。
+
 ## 文件结构
 
 ```
@@ -91,7 +140,11 @@ MyPage/
 ├── index.html          页面结构
 ├── css/style.css       样式（含深浅两套主题）
 ├── js/content.js       全部中英文文案（改内容看这里）
+├── js/chatbot.js       海宝助手逻辑
+├── js/chatbot-config.js   海宝 API 地址配置
+├── js/chatbot-personality.js  海宝性格与补充知识
 ├── js/main.js          交互逻辑
+├── api/chat.js         DeepSeek 后端（部署到 Vercel）
 ├── photos/photos.js    照片清单（加照片看这里）
 ├── photos/             照片文件
 └── assets/             头像等资源

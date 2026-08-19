@@ -925,6 +925,15 @@ a.paper-list__title:hover {
   background: var(--bg-card);
   border: 1px solid var(--border);
   color: var(--text);
+  white-space: pre-wrap;
+}
+.helper-chat__msg--typing {
+  opacity: 0.72;
+}
+.helper-chat__input:disabled,
+.helper-chat__send:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 .helper-chat__src {
   margin-top: 6px;

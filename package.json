@@ -1,0 +1,8 @@
+{
+  "name": "mypage-chatbot-api",
+  "private": true,
+  "description": "DeepSeek proxy for Haibao assistant on Carina's portfolio site",
+  "engines": {
+    "node": ">=18"
+  }
+}

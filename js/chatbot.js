@@ -16,10 +16,13 @@
 
   if (!toggleBtn || !chat || !messagesEl || !chipsEl || !formEl || !inputEl || !sendEl) return;
 
+  var config = window.CHATBOT_CONFIG || { apiUrl: "", stream: true };
+  var personalityConfig = window.CHATBOT_PERSONALITY || {};
+
   var locale = {
     zh: {
       title: "海宝助手",
-      subtitle: "我会尽力解答你想了解主人的问题～",
+      subtitle: "我会根据主页内容回答你～",
       buttonLabel: "问问海宝吧😜！",
       placeholder: "问我任何关于这个主页的问题...",
       send: "发送",
@@ -28,11 +31,13 @@
       hello: "你好呀，我是海潮的助手海宝 🫧\n我超级喜欢我的主人，很高兴能为你解答关于她的问题🙋🏻‍♀️，一定知无不言，言无不尽～你可以试试下面的问题：",
       unknown: "我暂时没有在主页内容里找到这条信息。你可以换个问法，或者问我教育、项目、证书、志愿经历这些内容～",
       intro: "我在主页里找到了这些相关信息：",
+      thinking: "思考中…",
+      apiError: "海宝暂时连不上大脑了，我先根据主页内容帮你查一下～",
       chips: ["你的研究方向是什么？", "你最近在做什么项目？", "你有哪些证书？", "怎么联系你？"]
     },
     en: {
       title: "HeyBaby Assistant",
-      subtitle: "I will do my best to answer what you want to know about my owner~",
+      subtitle: "I answer from this portfolio page~",
       buttonLabel: "Ask HeyBaby 🥰!",
       placeholder: "Ask me anything about this page...",
       send: "Send",
@@ -41,16 +46,29 @@
       hello: "Hi, I'm Haichao's assistant, HeyBaby 🫧\nI absolutely adore my owner and I'm so happy to answer your questions about her 🙋🏻‍♀️. I'll share everything I know—try one of these:",
       unknown: "I couldn't find that in the page content yet. Try asking about education, projects, certificates, volunteering, or contact info.",
       intro: "Here is what I found on this page:",
+      thinking: "Thinking…",
+      apiError: "HeyBaby can't reach the AI backend right now — I'll search the page for you instead.",
       chips: ["What's your research focus?", "What projects are you building?", "What certificates do you have?", "How can I contact you?"]
     }
   };
 
   var openedOnce = false;
+  var busy = false;
+  var conversation = [];
 
   function currentLang() {
     var saved = localStorage.getItem("lang");
     if (saved === "en" || saved === "zh") return saved;
     return (document.documentElement.getAttribute("lang") || "zh").indexOf("en") === 0 ? "en" : "zh";
+  }
+
+  function getApiUrl() {
+    return String(config.apiUrl || "").trim();
+  }
+
+  function getPersonality(lang) {
+    if (personalityConfig[lang]) return personalityConfig[lang];
+    return personalityConfig.zh || "";
   }
 
   function normalize(text) {
@@ -77,6 +95,139 @@
       href: href || "",
       tags: tags || []
     });
+  }
+
+  function joinParts() {
+    return Array.prototype.slice.call(arguments).filter(Boolean).join("；");
+  }
+
+  function cardLines(items, formatter) {
+    return (items || []).map(formatter).filter(Boolean).join("\n");
+  }
+
+  function buildPageContext(lang) {
+    var c = window.CONTENT && window.CONTENT[lang];
+    var certs = window.CERTS || [];
+    var blocks = [];
+    if (!c) return "";
+
+    blocks.push([
+      "# Profile",
+      c.hero.name,
+      c.hero.slogan,
+      c.hero.tagline,
+      (c.hero.introLines || []).join("\n")
+    ].join("\n"));
+
+    blocks.push([
+      "# Building / Recruiting",
+      c.recruit.title,
+      c.recruit.lead,
+      cardLines(c.recruit.projects, function (p) {
+        return p.name + "\n" + (p.tagline || "") + "\n" + (p.points || []).join("\n");
+      })
+    ].join("\n\n"));
+
+    blocks.push([
+      "# Education",
+      cardLines(c.education.items, function (it) {
+        return it.date + " · " + it.org + " · " + it.role + "\n" + (it.detail || "");
+      })
+    ].join("\n\n"));
+
+    blocks.push([
+      "# Internships",
+      cardLines(c.experience.items, function (it) {
+        return it.date + " · " + it.org + " · " + it.role + "\n" + (it.detail || "");
+      })
+    ].join("\n\n"));
+
+    if (c.research) {
+      blocks.push([
+        "# Research",
+        (c.research.papers || []).map(function (p) {
+          return p.title + (p.venue ? " · " + p.venue : "") + (p.link ? " · " + p.link : "");
+        }).join("\n"),
+        cardLines(c.research.stack, function (it) {
+          return it.name + "：" + (it.detail || "");
+        })
+      ].join("\n\n"));
+    }
+
+    if (c.projects) {
+      blocks.push([
+        "# Projects",
+        "Study:\n" + cardLines(c.projects.study, function (it) {
+          return it.name + " · " + it.role + "\n" + (it.detail || "");
+        }),
+        "Competitions:\n" + cardLines(c.projects.contest, function (it) {
+          return it.name + " · " + it.role + "\n" + (it.detail || "");
+        })
+      ].join("\n\n"));
+    }
+
+    if (c.campus) {
+      blocks.push([
+        "# Campus & Society",
+        cardLines(c.campus.campus, function (it) {
+          return it.name + " · " + it.role + "\n" + joinParts(it.detail, (it.bullets || []).join("；"));
+        }),
+        cardLines(c.campus.society, function (it) {
+          return it.name + " · " + it.role + "\n" + joinParts(it.detail, (it.bullets || []).join("；"));
+        })
+      ].join("\n\n"));
+    }
+
+    if (c.awards && c.awards.groups) {
+      blocks.push([
+        "# Awards",
+        c.awards.groups.map(function (g) {
+          return g.group + "：" + (g.items || []).join("；");
+        }).join("\n")
+      ].join("\n"));
+    }
+
+    if (c.skills) {
+      blocks.push([
+        "# Skills",
+        cardLines(c.skills.items, function (it) {
+          return it.name + "：" + (it.detail || "");
+        })
+      ].join("\n\n"));
+    }
+
+    if (c.contact) {
+      blocks.push([
+        "# Contact",
+        c.contact.lead,
+        cardLines(c.contact.items, function (it) {
+          return it.label + "：" + it.value + (it.href ? " (" + it.href + ")" : "");
+        })
+      ].join("\n\n"));
+    }
+
+    if (c.hobbies) {
+      blocks.push([
+        "# Hobbies",
+        c.hobbies.lead,
+        (c.hobbies.items || []).map(function (it) {
+          return (it.emoji || "") + " " + it.label;
+        }).join(" · ")
+      ].join("\n"));
+    }
+
+    certs.forEach(function (cert) {
+      var t = cert[lang] || cert.zh || cert.en;
+      if (!t) return;
+      blocks.push("# Certificate: " + t.name + "\n" + (t.desc || "") + (cert.link ? "\nLink: " + cert.link : ""));
+    });
+
+    var extra = personalityConfig.extraKnowledge || [];
+    if (extra.length) {
+      blocks.push("# Extra knowledge\n" + extra.join("\n"));
+    }
+
+    return blocks.join("\n\n");
   }
 
   function buildFacts(lang) {
@@ -130,14 +281,7 @@
     certs.forEach(function (cert) {
       var t = cert[lang] || cert.zh || cert.en;
       if (!t) return;
-      pushFact(
-        facts,
-        "certificates",
-        t.name,
-        t.desc || "",
-        cert.link || "#certificates",
-        ["certificate", "cert", "证书"]
-      );
+      pushFact(facts, "certificates", t.name, t.desc || "", cert.link || "#certificates", ["certificate", "cert", "证书"]);
     });
 
     return facts;
@@ -178,7 +322,7 @@
     return out.slice(0, 3);
   }
 
-  function buildAnswer(query, lang) {
+  function buildLocalAnswer(query, lang) {
     var l = locale[lang];
     var q = String(query || "").trim();
     var qNorm = normalize(q);
@@ -211,39 +355,144 @@
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
+  function appendSources(sources) {
+    if (!sources || !sources.length) return;
+    var src = document.createElement("div");
+    src.className = "helper-chat__src";
+    sources.forEach(function (s) {
+      if (!s.href) return;
+      var a = document.createElement("a");
+      a.href = s.href;
+      a.textContent = s.label;
+      if (s.href.indexOf("#") === 0) {
+        a.addEventListener("click", function (e) {
+          e.preventDefault();
+          closeChat();
+          var target = document.querySelector(s.href);
+          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      } else {
+        a.target = "_blank";
+        a.rel = "noopener";
+      }
+      src.appendChild(a);
+    });
+    if (src.children.length) messagesEl.appendChild(src);
+  }
+
   function appendMessage(role, text, sources) {
     var bubble = document.createElement("div");
     bubble.className = "helper-chat__msg " + (role === "user" ? "helper-chat__msg--user" : "helper-chat__msg--bot");
     bubble.dataset.role = role;
     bubble.textContent = text;
     messagesEl.appendChild(bubble);
-
-    if (sources && sources.length) {
-      var src = document.createElement("div");
-      src.className = "helper-chat__src";
-      sources.forEach(function (s) {
-        if (!s.href) return;
-        var a = document.createElement("a");
-        a.href = s.href;
-        a.textContent = s.label;
-        if (s.href.indexOf("#") === 0) {
-          a.addEventListener("click", function (e) {
-            e.preventDefault();
-            chat.classList.remove("open");
-            chat.setAttribute("aria-hidden", "true");
-            var target = document.querySelector(s.href);
-            if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-          });
-        } else {
-          a.target = "_blank";
-          a.rel = "noopener";
-        }
-        src.appendChild(a);
-      });
-      if (src.children.length) messagesEl.appendChild(src);
-    }
-
+    appendSources(sources);
     scrollToBottom();
+    return bubble;
+  }
+
+  function createBotBubble(initialText) {
+    var bubble = document.createElement("div");
+    bubble.className = "helper-chat__msg helper-chat__msg--bot helper-chat__msg--typing";
+    bubble.dataset.role = "bot";
+    bubble.textContent = initialText || "";
+    messagesEl.appendChild(bubble);
+    scrollToBottom();
+    return bubble;
+  }
+
+  function setBusy(next) {
+    busy = next;
+    inputEl.disabled = next;
+    sendEl.disabled = next;
+  }
+
+  function getConversationMessages() {
+    return conversation
+      .filter(function (m) { return m.role === "user" || m.role === "assistant"; })
+      .slice(-12)
+      .map(function (m) {
+        return { role: m.role, content: m.content };
+      });
+  }
+
+  function parseSseChunk(buffer, onDelta) {
+    var lines = buffer.split("\n");
+    var rest = lines.pop() || "";
+    lines.forEach(function (line) {
+      var trimmed = line.trim();
+      if (!trimmed || trimmed.indexOf("data:") !== 0) return;
+      var data = trimmed.slice(5).trim();
+      if (!data || data === "[DONE]") return;
+      try {
+        var json = JSON.parse(data);
+        var delta = json.choices && json.choices[0] && json.choices[0].delta
+          ? json.choices[0].delta.content
+          : "";
+        if (delta) onDelta(delta);
+      } catch (err) {
+        /* ignore partial json */
+      }
+    });
+    return rest;
+  }
+
+  function askDeepSeek(query, lang) {
+    var apiUrl = getApiUrl();
+    if (!apiUrl) return Promise.reject(new Error("API not configured"));
+
+    return fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        lang: lang,
+        stream: config.stream !== false,
+        personality: getPersonality(lang),
+        context: buildPageContext(lang),
+        messages: getConversationMessages()
+      })
+    }).then(function (res) {
+      if (!res.ok) {
+        return res.text().then(function (text) {
+          throw new Error(text || ("HTTP " + res.status));
+        });
+      }
+
+      if (config.stream === false || !res.body) {
+        return res.json().then(function (data) {
+          return { text: data.content || "", sources: [] };
+        });
+      }
+
+      var bubble = createBotBubble(locale[lang].thinking);
+      var fullText = "";
+      var reader = res.body.getReader();
+      var decoder = new TextDecoder();
+      var buffer = "";
+
+      function pump() {
+        return reader.read().then(function (chunk) {
+          if (chunk.done) {
+            bubble.classList.remove("helper-chat__msg--typing");
+            if (!fullText.trim()) fullText = locale[lang].unknown;
+            bubble.textContent = fullText;
+            scrollToBottom();
+            return { text: fullText, sources: [] };
+          }
+
+          buffer += decoder.decode(chunk.value, { stream: true });
+          buffer = parseSseChunk(buffer, function (delta) {
+            fullText += delta;
+            bubble.textContent = fullText;
+            bubble.classList.remove("helper-chat__msg--typing");
+            scrollToBottom();
+          });
+          return pump();
+        });
+      }
+
+      return pump();
+    });
   }
 
   function renderChips(lang) {
@@ -254,8 +503,9 @@
       b.className = "helper-chat__chip";
       b.textContent = q;
       b.addEventListener("click", function () {
+        if (busy) return;
         inputEl.value = q;
-        inputEl.focus();
+        formEl.requestSubmit();
       });
       chipsEl.appendChild(b);
     });
@@ -277,6 +527,7 @@
   }
 
   function refreshGreeting(lang) {
+    if (conversation.length !== 0) return;
     var bubbles = messagesEl.querySelectorAll(".helper-chat__msg");
     if (bubbles.length !== 1) return;
     var only = bubbles[0];
@@ -300,6 +551,40 @@
     chat.setAttribute("aria-hidden", "true");
   }
 
+  function handleSubmit(query) {
+    var lang = currentLang();
+    var l = locale[lang];
+    appendMessage("user", query);
+    conversation.push({ role: "user", content: query });
+    setBusy(true);
+
+    if (!getApiUrl()) {
+      var offline = buildLocalAnswer(query, lang);
+      appendMessage("bot", offline.text, offline.sources);
+      conversation.push({ role: "assistant", content: offline.text });
+      setBusy(false);
+      inputEl.focus();
+      return;
+    }
+
+    askDeepSeek(query, lang)
+      .then(function (res) {
+        if (config.stream === false) {
+          appendMessage("bot", res.text, res.sources || []);
+        }
+        conversation.push({ role: "assistant", content: res.text });
+      })
+      .catch(function () {
+        var local = buildLocalAnswer(query, lang);
+        appendMessage("bot", l.apiError + "\n\n" + local.text, local.sources);
+        conversation.push({ role: "assistant", content: local.text });
+      })
+      .finally(function () {
+        setBusy(false);
+        inputEl.focus();
+      });
+  }
+
   toggleBtn.addEventListener("click", function () {
     if (chat.classList.contains("open")) closeChat();
     else openChat();
@@ -308,13 +593,11 @@
 
   formEl.addEventListener("submit", function (e) {
     e.preventDefault();
+    if (busy) return;
     var query = inputEl.value.trim();
     if (!query) return;
     inputEl.value = "";
-    appendMessage("user", query);
-    var lang = currentLang();
-    var res = buildAnswer(query, lang);
-    appendMessage("bot", res.text, res.sources);
+    handleSubmit(query);
   });
 
   document.addEventListener("keydown", function (e) {
