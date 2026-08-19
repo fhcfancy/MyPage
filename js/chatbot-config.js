@@ -1,10 +1,10 @@
 /**
  * 海宝助手 API 配置
  *
- * 手机端最稳定：用 Vercel 链接打开主页（同源 /api/chat，无跨域问题）
- * https://my-page-eight-alpha.vercel.app/
+ * 注意：Vercel 在中国大陆往往无法访问，访客手机/电脑都可能连不上 API。
+ * 若主要访客在国内，建议将 api/chat.js 部署到国内云函数，并填 remoteApiUrl。
  *
- * GitHub Pages 链接在部分手机上可能因跨域失败，会自动降级为本地搜索。
+ * 暂停 API：enabled: false，并 push。
  */
 window.CHATBOT_CONFIG = {
   enabled: true,

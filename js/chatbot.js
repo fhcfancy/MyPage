@@ -34,7 +34,7 @@
       intro: "我在主页里找到了这些相关信息：",
       thinking: "思考中…",
       apiError: "海宝暂时连不上大脑了，我先根据主页内容帮你查一下～",
-      apiErrorMobile: "网络有点慢，请先试试用此链接打开：\nhttps://my-page-eight-alpha.vercel.app/",
+      apiErrorMobile: "AI 服务暂时连不上，我先根据主页内容帮你查～",
       chips: ["你的研究方向是什么？", "你最近在做什么项目？", "你有哪些证书？", "怎么联系你？"]
     },
     en: {
@@ -51,7 +51,7 @@
       intro: "Here is what I found on this page:",
       thinking: "Thinking…",
       apiError: "HeyBaby can't reach the AI backend right now — I'll search the page for you instead.",
-      apiErrorMobile: "Network is slow. Try opening:\nhttps://my-page-eight-alpha.vercel.app/",
+      apiErrorMobile: "AI is unavailable — I'll search the page for you~",
       chips: ["What's your research focus?", "What projects are you building?", "What certificates do you have?", "How can I contact you?"]
     }
   };
@@ -132,7 +132,7 @@
   }
 
   function getFetchTimeout() {
-    return isMobileClient() ? 35000 : 45000;
+    return isMobileClient() ? 12000 : 20000;
   }
 
   function fetchWithTimeout(url, options, timeoutMs) {
@@ -754,9 +754,7 @@
     var lang = forcedLang || currentLang();
     var l = locale[lang];
     titleEl.textContent = l.title;
-    subtitleEl.textContent = isApiEnabled()
-      ? (l.subtitle + (isMobileClient() && isCrossOriginApi() ? (lang === "zh" ? "（手机建议用 Vercel 链接）" : " (mobile: use Vercel link)") : ""))
-      : l.subtitleOffline;
+    subtitleEl.textContent = isApiEnabled() ? l.subtitle : l.subtitleOffline;
     var helperText = toggleBtn.querySelector(".helper-btn__text");
     if (helperText) helperText.textContent = l.buttonLabel;
     toggleBtn.setAttribute("title", l.title);
@@ -780,27 +778,6 @@
     }
   }
 
-  function showMobileStableLinkHint() {
-    if (!isMobileClient() || !isCrossOriginApi()) return;
-    if (messagesEl.querySelector(".helper-chat__banner")) return;
-    var lang = currentLang();
-    var banner = document.createElement("div");
-    banner.className = "helper-chat__banner";
-    var text = document.createElement("span");
-    text.textContent = lang === "zh"
-      ? "手机端 AI 在此链接可能不稳定，建议用："
-      : "For reliable AI on mobile, open:";
-    var link = document.createElement("a");
-    link.href = "https://my-page-eight-alpha.vercel.app/";
-    link.target = "_blank";
-    link.rel = "noopener";
-    link.textContent = lang === "zh" ? "稳定版主页" : "stable site link";
-    banner.appendChild(text);
-    banner.appendChild(link);
-    messagesEl.insertBefore(banner, messagesEl.firstChild);
-    scrollToBottom();
-  }
-
   function openChat() {
     chat.classList.add("open");
     chat.setAttribute("aria-hidden", "false");
@@ -808,7 +785,6 @@
       appendMessage("bot", locale[currentLang()].hello, []);
       openedOnce = true;
     }
-    showMobileStableLinkHint();
     if (isMobileClient()) {
       document.body.classList.add("helper-chat-open");
       window.setTimeout(function () { inputEl.focus(); }, 120);

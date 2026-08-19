@@ -94,7 +94,9 @@ API_ENABLED = false
 https://my-page-eight-alpha.vercel.app/
 ```
 
-此链接与 API **同源**，无跨域问题。GitHub Pages 链接在部分手机上可能无法调用 AI。
+> ⚠️ **国内访问说明：** Vercel 在中国大陆经常无法打开或超时，这不是你的配置错误。  
+> GitHub Pages（`fhcfancy.github.io/MyPage/`）在国内通常可以正常访问。  
+> 若主要访客在国内，需要把 `api/chat.js` 部署到**国内可访问**的云函数，并把地址填进 `remoteApiUrl`。
 
 ## 6. 手机端（iOS / Android）
 
