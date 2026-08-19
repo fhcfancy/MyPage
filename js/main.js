@@ -299,6 +299,7 @@
     lang = lang === "zh" ? "en" : "zh";
     localStorage.setItem("lang", lang);
     render(lang);
+    window.dispatchEvent(new CustomEvent("mypage:langchange", { detail: { lang: lang } }));
   });
 
   // 发邮件：复制邮箱并尝试打开邮件客户端（无客户端时至少能复制成功）

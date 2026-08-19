@@ -37,7 +37,7 @@
     },
     en: {
       title: "HeyBaby Assistant",
-      subtitle: "I answer from this portfolio page~",
+      subtitle: "I will do my best to answer what you want to know about my owner~",
       buttonLabel: "Ask HeyBaby 🥰!",
       placeholder: "Ask me anything about this page...",
       send: "Send",
@@ -511,13 +511,18 @@
     });
   }
 
-  function syncLocale() {
-    var lang = currentLang();
+  function isWelcomeMessage(text) {
+    return text === locale.zh.hello || text === locale.en.hello;
+  }
+
+  function syncLocale(forcedLang) {
+    var lang = forcedLang || currentLang();
     var l = locale[lang];
     titleEl.textContent = l.title;
     subtitleEl.textContent = l.subtitle;
     var helperText = toggleBtn.querySelector(".helper-btn__text");
     if (helperText) helperText.textContent = l.buttonLabel;
+    toggleBtn.setAttribute("title", l.title);
     inputEl.placeholder = l.placeholder;
     sendEl.textContent = l.send;
     toggleBtn.setAttribute("aria-label", l.openAria);
@@ -527,12 +532,12 @@
   }
 
   function refreshGreeting(lang) {
-    if (conversation.length !== 0) return;
     var bubbles = messagesEl.querySelectorAll(".helper-chat__msg");
-    if (bubbles.length !== 1) return;
-    var only = bubbles[0];
-    if (only.dataset.role === "bot") {
-      only.textContent = locale[lang].hello;
+    if (!bubbles.length) return;
+    var first = bubbles[0];
+    if (first.dataset.role !== "bot") return;
+    if (isWelcomeMessage(first.textContent)) {
+      first.textContent = locale[lang].hello;
     }
   }
 
@@ -604,12 +609,9 @@
     if (e.key === "Escape" && chat.classList.contains("open")) closeChat();
   });
 
-  var langBtn = el("langToggle");
-  if (langBtn) {
-    langBtn.addEventListener("click", function () {
-      window.setTimeout(syncLocale, 0);
-    });
-  }
+  window.addEventListener("mypage:langchange", function (e) {
+    syncLocale(e.detail && e.detail.lang);
+  });
 
   syncLocale();
 })();
