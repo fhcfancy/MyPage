@@ -79,6 +79,33 @@
     return personalityConfig.zh || "";
   }
 
+  function useStreaming() {
+    if (config.stream === false) return false;
+    var ua = navigator.userAgent || "";
+    var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    if (isIOS) return false;
+    if (/Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(ua)) return false;
+    if (window.matchMedia && window.matchMedia("(max-width: 768px)").matches) return false;
+    try {
+      return typeof ReadableStream !== "undefined" && !!Response.prototype.body;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function fetchWithTimeout(url, options, timeoutMs) {
+    if (typeof AbortController === "undefined") return fetch(url, options);
+    var controller = new AbortController();
+    var timer = window.setTimeout(function () {
+      controller.abort();
+    }, timeoutMs || 45000);
+    var next = Object.assign({}, options, { signal: controller.signal });
+    return fetch(url, next).finally(function () {
+      window.clearTimeout(timer);
+    });
+  }
+
   function normalize(text) {
     return String(text || "")
       .toLowerCase()
@@ -449,30 +476,36 @@
     var apiUrl = getApiUrl();
     if (!apiUrl) return Promise.reject(new Error("API not configured"));
 
-    return fetch(apiUrl, {
+    var stream = useStreaming();
+    var thinkingBubble = createBotBubble(locale[lang].thinking);
+
+    return fetchWithTimeout(apiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         lang: lang,
-        stream: config.stream !== false,
+        stream: stream,
         personality: getPersonality(lang),
         context: buildPageContext(lang),
         messages: getConversationMessages()
       })
-    }).then(function (res) {
+    }, 45000).then(function (res) {
       if (!res.ok) {
         return res.text().then(function (text) {
           throw new Error(text || ("HTTP " + res.status));
         });
       }
 
-      if (config.stream === false || !res.body) {
+      if (!stream || !res.body || typeof res.body.getReader !== "function") {
         return res.json().then(function (data) {
-          return { text: data.content || "", sources: [] };
+          var text = (data && data.content) ? data.content : locale[lang].unknown;
+          thinkingBubble.textContent = text;
+          thinkingBubble.classList.remove("helper-chat__msg--typing");
+          scrollToBottom();
+          return { text: text, sources: [] };
         });
       }
 
-      var bubble = createBotBubble(locale[lang].thinking);
       var fullText = "";
       var reader = res.body.getReader();
       var decoder = new TextDecoder();
@@ -481,9 +514,9 @@
       function pump() {
         return reader.read().then(function (chunk) {
           if (chunk.done) {
-            bubble.classList.remove("helper-chat__msg--typing");
+            thinkingBubble.classList.remove("helper-chat__msg--typing");
             if (!fullText.trim()) fullText = locale[lang].unknown;
-            bubble.textContent = fullText;
+            thinkingBubble.textContent = fullText;
             scrollToBottom();
             return { text: fullText, sources: [] };
           }
@@ -491,15 +524,28 @@
           buffer += decoder.decode(chunk.value, { stream: true });
           buffer = parseSseChunk(buffer, function (delta) {
             fullText += delta;
-            bubble.textContent = fullText;
-            bubble.classList.remove("helper-chat__msg--typing");
+            thinkingBubble.textContent = fullText;
+            thinkingBubble.classList.remove("helper-chat__msg--typing");
             scrollToBottom();
           });
           return pump();
         });
       }
 
-      return pump();
+      return pump().catch(function () {
+        return res.json().then(function (data) {
+          var text = (data && data.content) ? data.content : locale[lang].unknown;
+          thinkingBubble.textContent = text;
+          thinkingBubble.classList.remove("helper-chat__msg--typing");
+          scrollToBottom();
+          return { text: text, sources: [] };
+        });
+      });
+    }).catch(function (err) {
+      if (thinkingBubble && thinkingBubble.parentNode) {
+        thinkingBubble.parentNode.removeChild(thinkingBubble);
+      }
+      throw err;
     });
   }
 
@@ -513,7 +559,7 @@
       b.addEventListener("click", function () {
         if (busy) return;
         inputEl.value = q;
-        formEl.requestSubmit();
+        submitQuery();
       });
       chipsEl.appendChild(b);
     });
@@ -582,9 +628,6 @@
 
     askDeepSeek(query, lang)
       .then(function (res) {
-        if (config.stream === false) {
-          appendMessage("bot", res.text, res.sources || []);
-        }
         conversation.push({ role: "assistant", content: res.text });
       })
       .catch(function () {
@@ -598,6 +641,14 @@
       });
   }
 
+  function submitQuery() {
+    if (busy) return;
+    var query = inputEl.value.trim();
+    if (!query) return;
+    inputEl.value = "";
+    handleSubmit(query);
+  }
+
   toggleBtn.addEventListener("click", function () {
     if (chat.classList.contains("open")) closeChat();
     else openChat();
@@ -606,11 +657,12 @@
 
   formEl.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (busy) return;
-    var query = inputEl.value.trim();
-    if (!query) return;
-    inputEl.value = "";
-    handleSubmit(query);
+    submitQuery();
+  });
+
+  sendEl.addEventListener("click", function (e) {
+    e.preventDefault();
+    submitQuery();
   });
 
   document.addEventListener("keydown", function (e) {

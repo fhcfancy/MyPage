@@ -967,7 +967,7 @@ a.paper-list__title:hover {
 .helper-chat__form {
   display: flex;
   gap: 8px;
-  padding: 12px 14px 14px;
+  padding: 12px 14px max(14px, env(safe-area-inset-bottom));
   border-top: 1px solid var(--border);
 }
 .helper-chat__input {
@@ -976,21 +976,27 @@ a.paper-list__title:hover {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 10px 12px;
-  font-size: 0.88rem;
+  font-size: 16px;
   background: var(--bg-card);
   color: var(--text);
   outline: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .helper-chat__input:focus { border-color: rgba(150, 120, 220, 0.55); }
 .helper-chat__send {
   border: none;
   border-radius: 12px;
   padding: 0 14px;
+  min-height: 44px;
+  min-width: 56px;
   font-size: 0.82rem;
   font-weight: 800;
   color: #fff;
   background: var(--grad);
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 [data-theme="dark"] .hobby-tag:nth-child(7n+1),
@@ -1116,9 +1122,11 @@ a.paper-list__title:hover {
   .hero__tagline { font-size: clamp(0.68rem, 2.9vw, 1rem); letter-spacing: 0; }
   .helper-chat {
     right: 14px;
-    top: 72px;
-    width: calc(100vw - 28px);
-    max-height: 70vh;
+    left: 14px;
+    top: auto;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    width: auto;
+    max-height: min(72dvh, 620px);
   }
 }
 @media (max-width: 520px) {
