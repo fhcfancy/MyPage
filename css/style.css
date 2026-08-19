@@ -963,6 +963,8 @@ a.paper-list__title:hover {
   padding: 6px 10px;
   font-size: 0.78rem;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 .helper-chat__form {
   display: flex;
