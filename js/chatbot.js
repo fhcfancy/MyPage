@@ -23,6 +23,7 @@
     zh: {
       title: "海宝助手",
       subtitle: "我会尽力解答你想了解主人的问题～",
+      subtitleOffline: "当前离线模式，不调用 AI～",
       buttonLabel: "问问海宝吧😜！",
       placeholder: "问我任何关于这个主页的问题...",
       send: "发送",
@@ -38,6 +39,7 @@
     en: {
       title: "HeyBaby Assistant",
       subtitle: "I will do my best to answer what you want to know about my owner~",
+      subtitleOffline: "Offline mode — no AI calls~",
       buttonLabel: "Ask HeyBaby 🥰!",
       placeholder: "Ask me anything about this page...",
       send: "Send",
@@ -62,8 +64,13 @@
     return (document.documentElement.getAttribute("lang") || "zh").indexOf("en") === 0 ? "en" : "zh";
   }
 
+  function isApiEnabled() {
+    if (config.enabled === false || config.enabled === "false" || config.enabled === 0) return false;
+    return true;
+  }
+
   function getApiUrl() {
-    if (config.enabled === false) return "";
+    if (!isApiEnabled()) return "";
     return String(config.apiUrl || "").trim();
   }
 
@@ -520,7 +527,7 @@
     var lang = forcedLang || currentLang();
     var l = locale[lang];
     titleEl.textContent = l.title;
-    subtitleEl.textContent = l.subtitle;
+    subtitleEl.textContent = isApiEnabled() ? l.subtitle : l.subtitleOffline;
     var helperText = toggleBtn.querySelector(".helper-btn__text");
     if (helperText) helperText.textContent = l.buttonLabel;
     toggleBtn.setAttribute("title", l.title);

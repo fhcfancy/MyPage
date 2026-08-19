@@ -6,6 +6,12 @@
 const DEEPSEEK_API_BASE = process.env.DEEPSEEK_API_BASE || "https://api.deepseek.com";
 const MODEL = process.env.DEEPSEEK_MODEL || "deepseek-chat";
 
+function isApiEnabled() {
+  var v = process.env.API_ENABLED;
+  if (v === undefined || v === null || v === "") return true;
+  return v === "true" || v === "1";
+}
+
 function parseAllowedOrigins() {
   var raw = process.env.ALLOWED_ORIGINS || "*";
   return raw.split(",").map(function (s) { return s.trim(); }).filter(Boolean);
@@ -37,6 +43,10 @@ module.exports = async function handler(req, res) {
 
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  if (!isApiEnabled()) {
+    return res.status(503).json({ error: "API is disabled (API_ENABLED=false on server)." });
   }
 
   var apiKey = process.env.DEEPSEEK_API_KEY;

@@ -49,15 +49,28 @@ git push origin main
 
 ### 暂停 DeepSeek（不产生 API 费用）
 
-编辑 `js/chatbot-config.js`：
+需要 **两步都做**，否则 Vercel 后端仍可能被直接调用并扣费：
+
+**第 1 步 — 前端**（`js/chatbot-config.js`）：
 
 ```js
 enabled: false,
+apiUrl: "",
 ```
 
-保存 → push。海宝仍可用，会改用主页本地搜索回答。
+保存 → push。
 
-恢复：改回 `enabled: true` 再 push。
+**第 2 步 — Vercel 后端**（Project → Settings → Environment Variables）：
+
+```text
+API_ENABLED = false
+```
+
+保存后 **Redeploy** 一次。
+
+恢复：前端 `enabled: true` 并填回 `apiUrl`，Vercel 设 `API_ENABLED=true`，再 redeploy。
+
+离线时副标题会显示「当前离线模式，不调用 AI～」。
 
 ### 改性格 / 补充知识
 
