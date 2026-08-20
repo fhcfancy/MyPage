@@ -119,6 +119,19 @@
     // 奖项
     el("awardEyebrow").textContent = c.awards.eyebrow;
     el("awardTitle").textContent = c.awards.title;
+    var featuredHtml = (c.awards.featured || []).map(function (item) {
+      return '<div class="award-featured anim">' +
+        '<p class="award-featured__category">' + item.category + "</p>" +
+        '<h3 class="award-featured__title">' + item.title + "</h3>" +
+        (item.desc ? '<p class="award-featured__desc">' + item.desc + "</p>" : "") +
+        '<img class="award-featured__img" src="' + item.img + '" alt="' + (item.alt || item.title) + '" loading="lazy" />' +
+        "</div>";
+    }).join("");
+    var awardFeatured = el("awardFeatured");
+    if (awardFeatured) {
+      awardFeatured.innerHTML = featuredHtml;
+      awardFeatured.querySelectorAll(".award-featured__img").forEach(bindLightbox);
+    }
     el("awardGrid").innerHTML = c.awards.groups.map(function (g) {
       return '<div class="award-group anim"><h3 class="award-group__title">' + g.group +
         "</h3><ul>" + g.items.map(function (i) { return "<li>" + i + "</li>"; }).join("") +

@@ -204,6 +204,14 @@ window.CONTENT = {
     awards: {
       eyebrow: "奖项荣誉",
       title: "荣誉墙",
+      featured: [
+        {
+          category: "演讲比赛",
+          title: "第 21 届演讲比赛 · 地区决赛",
+          img: "photos/awards/21st-regional-finals-web.jpg",
+          alt: "第21届演讲比赛地区决赛奖状"
+        }
+      ],
       groups: [
         {
           group: "数学建模竞赛",
@@ -587,6 +595,14 @@ window.CONTENT = {
     awards: {
       eyebrow: "Honors",
       title: "Awards & Honors",
+      featured: [
+        {
+          category: "Speech Competition",
+          title: "21st Speech Competition · Regional Final",
+          img: "photos/awards/21st-regional-finals-web.jpg",
+          alt: "21st Speech Competition Regional Final certificate"
+        }
+      ],
       groups: [
         {
           group: "Mathematical Modeling",

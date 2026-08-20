@@ -649,6 +649,53 @@ a.paper-list__title:hover {
 .tag:hover { transform: translateY(-2px); }
 
 /* Awards */
+.awards__featured {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  margin-bottom: 22px;
+  max-width: 520px;
+}
+.award-featured {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 22px 20px;
+  box-shadow: var(--shadow);
+}
+.award-featured__category {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 980px;
+  padding: 4px 10px;
+  margin-bottom: 12px;
+}
+.award-featured__title {
+  font-size: 1.08rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+  line-height: 1.35;
+}
+.award-featured__desc {
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  margin-bottom: 14px;
+  line-height: 1.55;
+}
+.award-featured__img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+  display: block;
+  background: #fff;
+}
 .awards__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
 .award-group {
   background: var(--bg-card);

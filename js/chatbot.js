@@ -336,12 +336,13 @@
     }
 
     if (c.awards && c.awards.groups) {
-      blocks.push([
-        "# Awards",
-        c.awards.groups.map(function (g) {
-          return g.group + "：" + (g.items || []).join("；");
-        }).join("\n")
-      ].join("\n"));
+      var awardLines = (c.awards.featured || []).map(function (it) {
+        return it.category + " · " + it.title;
+      });
+      c.awards.groups.forEach(function (g) {
+        awardLines.push(g.group + "：" + (g.items || []).join("；"));
+      });
+      blocks.push(["# Awards", awardLines.join("\n")].join("\n"));
     }
 
     if (c.skills) {
@@ -424,6 +425,10 @@
         pushFact(facts, "society", it.name, it.role + "；" + (it.detail || "") + "；" + (it.bullets || []).join("；"), "#campus", ["society", "社会", "volunteer"]);
       });
     }
+
+    (c.awards.featured || []).forEach(function (it) {
+      pushFact(facts, "awards", it.category + " · " + it.title, it.desc || it.title, "#awards", ["awards", "speech", "演讲"]);
+    });
 
     (c.awards.groups || []).forEach(function (g) {
       pushFact(facts, "awards", g.group, (g.items || []).join("；"), "#awards", ["awards", "奖项"]);
