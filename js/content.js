@@ -207,9 +207,9 @@ window.CONTENT = {
       featured: [
         {
           category: "演讲比赛",
-          title: "第 21 届演讲比赛 · 地区决赛",
+          title: "第九届中国日报社「21世纪杯」全国青年英语演讲比赛地区决赛一等奖",
           img: "photos/awards/21st-regional-finals-web.jpg",
-          alt: "第21届演讲比赛地区决赛奖状"
+          alt: "第九届中国日报社21世纪杯全国青年英语演讲比赛地区决赛一等奖奖状"
         }
       ],
       groups: [
@@ -598,9 +598,9 @@ window.CONTENT = {
       featured: [
         {
           category: "Speech Competition",
-          title: "21st Speech Competition · Regional Final",
+          title: "First Prize, Regional Final — 9th China Daily 21st Century Cup National English Speaking Competition",
           img: "photos/awards/21st-regional-finals-web.jpg",
-          alt: "21st Speech Competition Regional Final certificate"
+          alt: "First Prize certificate, 9th China Daily 21st Century Cup Regional Final"
         }
       ],
       groups: [
